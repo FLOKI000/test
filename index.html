@@ -5,68 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYRAX GAME CLUB | کلاب حرفه‌ای گیمینگ شیراز</title>
 
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
     <!-- Vazirmatn Font -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================================
-                           ۱. پالت رنگی مونوکروم + Accent
-                           ============================================================ */
+                        CSS Variables
+                        ============================================================ */
         :root {
             --bg-primary: #0a0a0a;
             --bg-secondary: #0f0f0f;
-            --bg-elevated: #1a1a1a;
-            --bg-hover: #222222;
+            --bg-card: #141414;
+            --bg-hover: #1e1e1e;
             --text-primary: #f5f5f5;
             --text-secondary: #a3a3a3;
-            --text-muted: #737373;
+            --text-muted: #6b6b6b;
             --accent: #00ff88;
-            --accent-dim: rgba(0, 255, 136, 0.08);
-            --accent-glow: rgba(0, 255, 136, 0.2);
+            --accent-2: #22d3ee;
+            --accent-3: #a855f7;
+            --accent-4: #f59e0b;
+            --accent-dim: rgba(0, 255, 136, 0.07);
             --border: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(0, 255, 136, 0.25);
-            --radius-sm: 12px;
-            --radius: 20px;
-            --radius-lg: 28px;
-            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-hover: rgba(0, 255, 136, 0.3);
+            --radius-sm: 14px;
+            --radius: 22px;
+            --radius-lg: 30px;
+            --radius-full: 9999px;
+            --transition: 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --transition-smooth: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
             --font-main: 'Vazirmatn', system-ui, sans-serif;
-
-            /* ============================================================
-                               ۳. تایپوگرافی Scale System (Major Third)
-                               ============================================================ */
             --text-xs: 0.75rem;
             --text-sm: 0.875rem;
             --text-base: 1rem;
-            --text-lg: 1.25rem;
-            --text-xl: 1.5rem;
-            --text-2xl: 2rem;
-            --text-3xl: 2.5rem;
-            --text-hero: clamp(3rem, 8vw, 6.5rem);
+            --text-lg: 1.2rem;
+            --text-xl: 1.6rem;
+            --text-2xl: 2.2rem;
+            --text-3xl: 2.8rem;
+            --text-hero: clamp(3rem, 8vw, 6rem);
+
+            /* سایه‌های نئونی */
+            --neon-green: 0 0 15px rgba(0, 255, 136, 0.25), 0 0 40px rgba(0, 255, 136, 0.08), 0 0 80px rgba(0, 255, 136, 0.04);
+            --neon-cyan: 0 0 15px rgba(34, 211, 238, 0.25), 0 0 40px rgba(34, 211, 238, 0.08), 0 0 80px rgba(34, 211, 238, 0.04);
+            --neon-purple: 0 0 15px rgba(168, 85, 247, 0.25), 0 0 40px rgba(168, 85, 247, 0.08), 0 0 80px rgba(168, 85, 247, 0.04);
+            --neon-amber: 0 0 15px rgba(245, 158, 11, 0.25), 0 0 40px rgba(245, 158, 11, 0.08), 0 0 80px rgba(245, 158, 11, 0.04);
         }
 
-        /* ============================================================
-                           ۱۱. تم روشن
-                           ============================================================ */
         [data-theme="light"] {
-            --bg-primary: #fafafa;
-            --bg-secondary: #f0f0f0;
-            --bg-elevated: #ffffff;
-            --bg-hover: #f5f5f5;
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #e9ecef;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f3f5;
             --text-primary: #1a1a1a;
-            --text-secondary: #525252;
-            --text-muted: #737373;
-            --border: rgba(0, 0, 0, 0.06);
-            --border-hover: rgba(0, 180, 100, 0.3);
-            --accent-dim: rgba(0, 200, 100, 0.06);
-            --accent-glow: rgba(0, 200, 100, 0.15);
+            --text-secondary: #495057;
+            --text-muted: #868e96;
+            --border: rgba(0, 0, 0, 0.07);
+            --border-hover: rgba(0, 180, 100, 0.35);
+            --accent-dim: rgba(0, 200, 100, 0.05);
+            --neon-green: 0 0 15px rgba(0, 200, 100, 0.15), 0 0 40px rgba(0, 200, 100, 0.05);
+            --neon-cyan: 0 0 15px rgba(34, 180, 200, 0.15), 0 0 40px rgba(34, 180, 200, 0.05);
+            --neon-purple: 0 0 15px rgba(140, 60, 220, 0.15), 0 0 40px rgba(140, 60, 220, 0.05);
+            --neon-amber: 0 0 15px rgba(220, 140, 10, 0.15), 0 0 40px rgba(220, 140, 10, 0.05);
         }
 
         /* ============================================================
-                           Global Reset
-                           ============================================================ */
+                        Reset
+                        ============================================================ */
         *,
         *::before,
         *::after {
@@ -84,12 +87,12 @@
             font-family: var(--font-main);
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.75;
             overflow-x: hidden;
-            transition: background var(--transition), color var(--transition);
+            transition: background var(--transition-smooth), color var(--transition-smooth);
+            direction: rtl;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -102,53 +105,95 @@
         }
 
         /* ============================================================
-                           ۹. ناوبری مخفی/ظاهر شونده
-                           ============================================================ */
+                        SVG Icons Base
+                        ============================================================ */
+        .svg-icon {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            vertical-align: middle;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+        .svg-icon-fill {
+            fill: currentColor;
+            stroke: none;
+        }
+
+        /* ============================================================
+                        Navbar
+                        ============================================================ */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 0 2rem;
-            height: 72px;
+            height: 70px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1.5rem;
             background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--border);
-            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), background var(--transition), border var(--transition);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), background var(--transition-smooth), border var(--transition-smooth);
         }
-
         [data-theme="light"] .navbar {
-            background: rgba(250, 250, 250, 0.85);
+            background: rgba(248, 249, 250, 0.85);
         }
-
         .navbar.hidden {
             transform: translateY(-100%);
         }
 
-        .logo {
-            font-size: var(--text-xl);
+        .navbar-brand {
+            order: 1;
+            font-size: var(--text-lg);
             font-weight: 900;
             color: var(--accent);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+        .navbar-brand .svg-icon {
+            width: 1.6em;
+            height: 1.6em;
+            color: var(--accent);
         }
 
-        .nav-links {
+        .hamburger-btn {
+            order: 2;
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all var(--transition);
+            line-height: 0;
+        }
+        .hamburger-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            order: 3;
             display: flex;
-            gap: 2.5rem;
+            gap: 2.2rem;
             list-style: none;
             align-items: center;
         }
-
-        .nav-links a {
+        .nav-menu a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: var(--text-sm);
@@ -156,180 +201,288 @@
             transition: color var(--transition);
             position: relative;
         }
-
-        .nav-links a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -5px;
             right: 0;
             width: 0;
-            height: 1.5px;
+            height: 2px;
             background: var(--accent);
+            border-radius: 2px;
             transition: width var(--transition);
         }
-
-        .nav-links a:hover {
+        .nav-menu a:hover {
             color: var(--text-primary);
         }
-        .nav-links a:hover::after {
+        .nav-menu a:hover::after {
             width: 100%;
         }
 
-        .theme-toggle {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 42px;
-            height: 42px;
+        /* ============================================================
+                        Floating Group - پایین سمت چپ
+                        ============================================================ */
+        .floating-group {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .float-btn {
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            position: relative;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.6rem;
-            cursor: pointer;
+        .float-btn .svg-icon {
+            width: 1.5em;
+            height: 1.5em;
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .float-btn:hover .svg-icon {
+            transform: scale(1.15);
+        }
+
+        /* دکمه تغییر تم */
+        .float-theme {
+            color: var(--accent-4);
+            animation: floatGentle 4s ease-in-out infinite;
+            animation-delay: 0s;
+        }
+        .float-theme::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-4);
+            opacity: 0;
+            transition: all 0.5s ease;
+            animation: none;
+        }
+        .float-theme:hover {
+            border-color: var(--accent-4);
+            box-shadow: var(--neon-amber);
+            transform: translateY(-6px) scale(1.08);
+        }
+        .float-theme:hover::before {
+            opacity: 1;
+            animation: spinAround 2s linear infinite;
+        }
+
+        /* دکمه تماس */
+        .float-call {
+            color: var(--accent-2);
+            animation: floatGentle 4s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+        .float-call::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-2);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .float-call:hover {
+            border-color: var(--accent-2);
+            box-shadow: var(--neon-cyan);
+            transform: translateY(-6px) scale(1.08);
+        }
+        .float-call:hover::after {
+            opacity: 0.6;
+            animation: pulseRing 1.5s ease-out infinite;
         }
 
         /* ============================================================
-                           ۲. فضای منفی (سخاوتمندانه)
-                           ============================================================ */
+                        Sections
+                        ============================================================ */
         section {
-            padding: 7rem 2rem;
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .section-label {
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             font-size: var(--text-xs);
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 500;
         }
-
         .section-title {
             font-size: var(--text-3xl);
             font-weight: 200;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
             margin-bottom: 1rem;
             color: var(--text-primary);
         }
-
         .section-desc {
             color: var(--text-muted);
             font-size: var(--text-lg);
             font-weight: 300;
-            max-width: 600px;
+            max-width: 550px;
             margin-bottom: 4rem;
-            line-height: 1.9;
+            line-height: 2;
         }
 
         /* ============================================================
-                           Hero
-                           ============================================================ */
+                        Hero
+                        ============================================================ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 72px;
+            padding-top: 70px;
+            position: relative;
+            overflow: hidden;
         }
-
+        .hero-bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.06;
+            pointer-events: none;
+        }
+        .hero-bg-glow.green {
+            background: var(--accent);
+            top: -200px;
+            right: -200px;
+            animation: heroGlowFloat 8s ease-in-out infinite;
+        }
+        .hero-bg-glow.cyan {
+            background: var(--accent-2);
+            bottom: -200px;
+            left: -200px;
+            animation: heroGlowFloat 8s ease-in-out infinite reverse;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
         .hero h1 {
             font-size: var(--text-hero);
             font-weight: 100;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.05em;
             line-height: 1.05;
             margin-bottom: 1.5rem;
         }
-
-        .hero h1 span {
+        .hero h1 .accent-text {
             color: var(--accent);
+            text-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
         }
-
         .hero p {
             font-size: var(--text-xl);
             color: var(--text-muted);
             font-weight: 300;
             margin-bottom: 3rem;
-            max-width: 500px;
+            max-width: 480px;
             margin-left: auto;
             margin-right: auto;
         }
 
         /* ============================================================
-                           ۴. کارت‌های شیشه‌ای (Glassmorphism)
-                           ============================================================ */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.015);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+                        Cards with Neon Shadow
+                        ============================================================ */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 2.5rem;
-            transition: all 0.45s ease;
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
             position: relative;
             overflow: hidden;
         }
-
-        [data-theme="light"] .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.04);
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, var(--accent-dim) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
         }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(0, 255, 136, 0.2);
+        .card:hover {
+            border-color: var(--border-hover);
             transform: translateY(-8px);
-            box-shadow: 0 30px 60px -20px rgba(0, 255, 136, 0.08);
+            box-shadow: var(--neon-green);
         }
-
-        [data-theme="light"] .glass-card:hover {
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.08);
+        .card:hover::before {
+            opacity: 1;
         }
-
-        .glass-card .card-icon {
-            font-size: 2.8rem;
+        .card.card-cyan:hover {
+            box-shadow: var(--neon-cyan);
+            border-color: rgba(34, 211, 238, 0.35);
+        }
+        .card.card-purple:hover {
+            box-shadow: var(--neon-purple);
+            border-color: rgba(168, 85, 247, 0.35);
+        }
+        .card-icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1.5rem;
-            display: block;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
         }
-
-        .glass-card h3 {
+        .card:hover .card-icon-wrap {
+            border-color: var(--accent);
+            box-shadow: var(--neon-green);
+        }
+        .card-icon-wrap .svg-icon {
+            width: 1.8em;
+            height: 1.8em;
+            color: var(--accent);
+        }
+        .card h3 {
             font-weight: 400;
             font-size: var(--text-lg);
             margin-bottom: 0.6rem;
+            color: var(--text-primary);
         }
-
-        .glass-card p {
+        .card p {
             color: var(--text-muted);
             font-size: var(--text-sm);
             font-weight: 300;
-            line-height: 1.9;
+            line-height: 2;
         }
 
-        /* Grids */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
-
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -337,8 +490,149 @@
         }
 
         /* ============================================================
-                           ۵. دکمه‌های Outline + Hover Fill
-                           ============================================================ */
+                        Accordion
+                        ============================================================ */
+        .accordion-wrap {
+            margin-bottom: 1rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            transition: all var(--transition-smooth);
+        }
+        .accordion-wrap:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--neon-green);
+        }
+        .accordion-header {
+            width: 100%;
+            padding: 1.2rem 1.75rem;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: var(--text-base);
+            cursor: pointer;
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-main);
+            transition: all var(--transition);
+        }
+        .accordion-header:hover {
+            background: var(--bg-hover);
+        }
+        .accordion-header .acc-icon {
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+        }
+        .accordion-header.open .acc-icon {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+            border-top: 1px solid transparent;
+        }
+        .accordion-body.open {
+            max-height: 800px;
+            border-top-color: var(--border);
+        }
+        .accordion-body-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .accordion-body-inner.single-col {
+            grid-template-columns: 1fr;
+        }
+        .game-row {
+            padding: 1.1rem 1.75rem;
+            border-bottom: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: default;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+        .game-row:last-child {
+            border-bottom: none;
+        }
+        .game-row:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            padding-right: 2.5rem;
+        }
+        .service-mini-card {
+            padding: 2rem;
+            text-align: center;
+            border-left: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .service-mini-card:last-child {
+            border-left: none;
+        }
+        .service-mini-card:hover {
+            background: var(--bg-hover);
+        }
+
+        /* ============================================================
+                        Gallery
+                        ============================================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .gallery-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--neon-green);
+        }
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        .gallery-item-overlay .svg-icon {
+            width: 2.5em;
+            height: 2.5em;
+            color: #fff;
+            stroke-width: 1.5;
+        }
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        /* ============================================================
+                        Buttons
+                        ============================================================ */
         .btn-primary {
             display: inline-block;
             padding: 1rem 2.8rem;
@@ -349,37 +643,33 @@
             font-size: var(--text-sm);
             font-weight: 500;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
             text-decoration: none;
             font-family: var(--font-main);
             letter-spacing: 0.03em;
+            position: relative;
+            overflow: hidden;
         }
         .btn-primary:hover {
-            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.35);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.5), 0 0 80px rgba(0, 255, 136, 0.2);
             transform: translateY(-3px);
         }
-
         .btn-outline {
             display: inline-block;
-            padding: 0.9rem 2.5rem;
+            padding: 0.85rem 2.2rem;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid var(--border);
             color: var(--text-primary);
             border-radius: 100px;
             font-size: var(--text-sm);
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
             text-decoration: none;
             font-family: var(--font-main);
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
-
-        [data-theme="light"] .btn-outline {
-            border: 1px solid rgba(0, 0, 0, 0.12);
-        }
-
         .btn-outline::before {
             content: '';
             position: absolute;
@@ -387,174 +677,25 @@
             background: var(--accent);
             z-index: -1;
             transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
-
         .btn-outline:hover {
             border-color: var(--accent);
             color: #000;
+            box-shadow: var(--neon-green);
         }
         .btn-outline:hover::before {
             transform: scaleX(1);
-            transform-origin: left;
         }
-
         .btn-sm {
-            padding: 0.6rem 1.6rem;
+            padding: 0.6rem 1.5rem;
             font-size: var(--text-xs);
         }
 
         /* ============================================================
-                           ۱۰. Accordion مینیمال
-                           ============================================================ */
-        .accordion {
-            margin-bottom: 1rem;
-        }
-
-        .accordion-trigger {
-            width: 100%;
-            padding: 1.3rem 1.75rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text-primary);
-            font-size: var(--text-base);
-            cursor: pointer;
-            text-align: right;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all var(--transition);
-            font-family: var(--font-main);
-        }
-
-        .accordion-trigger:hover {
-            border-color: var(--border-hover);
-            background: var(--bg-hover);
-        }
-
-        .accordion-trigger .acc-icon {
-            transition: transform 0.35s ease;
-            font-size: 0.9rem;
-            color: var(--accent);
-        }
-
-        .accordion-trigger.open {
-            border-color: var(--accent);
-            border-radius: var(--radius) var(--radius) 0 0;
-        }
-        .accordion-trigger.open .acc-icon {
-            transform: rotate(45deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--bg-elevated);
-            border: 1px solid transparent;
-            border-top: none;
-            border-radius: 0 0 var(--radius) var(--radius);
-        }
-
-        .accordion-content.open {
-            max-height: 600px;
-            border-color: var(--border);
-        }
-
-        .accordion-content .game-row {
-            padding: 1.1rem 1.75rem;
-            border-bottom: 1px solid var(--border);
-            transition: all var(--transition);
-            cursor: default;
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-        }
-        .accordion-content .game-row:last-child {
-            border-bottom: none;
-        }
-        .accordion-content .game-row:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            padding-right: 2.5rem;
-        }
-
-        /* Service mini cards inside accordion */
-        .service-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-        .service-mini {
-            padding: 2rem;
-            text-align: center;
-            border-left: 1px solid var(--border);
-            transition: all var(--transition);
-        }
-        .service-mini:last-child {
-            border-left: none;
-        }
-        .service-mini:hover {
-            background: var(--bg-hover);
-        }
-
-        /* ============================================================
-                           ۷. گالری با Hover Reveal
-                           ============================================================ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--radius);
-            cursor: pointer;
-            aspect-ratio: 4/3;
-            border: 1px solid var(--border);
-            transition: border var(--transition);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-item:hover {
-            border-color: var(--accent);
-        }
-        .gallery-item:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.04);
-        }
-
-        .gallery-item::after {
-            content: '+';
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            font-weight: 100;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.45);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-
-        /* ============================================================
-                           Form Inputs
-                           ============================================================ */
+                        Form
+                        ============================================================ */
         .form-input,
         .form-select {
             width: 100%;
@@ -572,16 +713,16 @@
         .form-select:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-dim);
+            box-shadow: var(--neon-green);
         }
         .form-select option {
-            background: var(--bg-elevated);
+            background: var(--bg-card);
             color: var(--text-primary);
         }
 
         /* ============================================================
-                           Modal
-                           ============================================================ */
+                        Modal
+                        ============================================================ */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -592,7 +733,7 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.35s ease;
+            transition: all 0.5s ease;
         }
         .modal-overlay.active {
             opacity: 1;
@@ -603,57 +744,31 @@
             max-width: 90vw;
             border-radius: var(--radius-sm);
         }
-        .modal-close {
+        .modal-close-btn {
             position: absolute;
             top: 2rem;
             right: 2rem;
-            background: var(--bg-elevated);
+            background: var(--bg-card);
             border: 1px solid var(--border);
             color: #fff;
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            font-size: 1.4rem;
             cursor: pointer;
             transition: all var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .modal-close:hover {
+        .modal-close-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
+            box-shadow: var(--neon-green);
         }
 
         /* ============================================================
-                           WhatsApp Float
-                           ============================================================ */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            width: 54px;
-            height: 54px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.5rem;
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
-            z-index: 999;
-            transition: all var(--transition);
-            text-decoration: none;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.12);
-            box-shadow: 0 14px 40px rgba(37, 211, 102, 0.5);
-        }
-
-        /* ============================================================
-                           Footer
-                           ============================================================ */
+                        Footer
+                        ============================================================ */
         .footer {
             border-top: 1px solid var(--border);
             padding: 5rem 2rem;
@@ -681,7 +796,7 @@
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color var(--transition);
+            transition: all var(--transition);
             font-size: var(--text-sm);
             display: flex;
             align-items: center;
@@ -689,6 +804,7 @@
         }
         .footer-links a:hover {
             color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         .footer-copy {
             color: var(--text-muted);
@@ -697,13 +813,109 @@
         }
 
         /* ============================================================
-                           ۶. انیمیشن Reveal (Intersection Observer)
-                           ============================================================ */
+                        Animations - نرم و حرفه‌ای
+                        ============================================================ */
+        @keyframes floatGentle {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-4px);
+            }
+            85% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes spinAround {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heroGlowFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.08);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+        }
+
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes fadeInUpSmooth {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes borderGlow {
+            0%,
+            100% {
+                border-color: var(--border);
+            }
+            50% {
+                border-color: var(--border-hover);
+            }
+        }
+
+        .spin-slow {
+            animation: spinSlow 25s linear infinite;
+        }
+
+        /* Reveal */
         .reveal {
             opacity: 0;
-            transform: translateY(45px);
-            transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(60px);
+            transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .reveal.visible {
             opacity: 1;
@@ -713,36 +925,51 @@
         /* Stagger */
         .stagger>* {
             opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .stagger.visible>*:nth-child(1) {
-            transition-delay: 0.05s;
+            transition-delay: 0.06s;
         }
         .stagger.visible>*:nth-child(2) {
-            transition-delay: 0.15s;
+            transition-delay: 0.18s;
         }
         .stagger.visible>*:nth-child(3) {
-            transition-delay: 0.25s;
+            transition-delay: 0.30s;
         }
         .stagger.visible>*:nth-child(4) {
-            transition-delay: 0.35s;
+            transition-delay: 0.42s;
         }
         .stagger.visible>*:nth-child(5) {
-            transition-delay: 0.45s;
+            transition-delay: 0.54s;
         }
         .stagger.visible>*:nth-child(6) {
-            transition-delay: 0.55s;
+            transition-delay: 0.66s;
         }
         .stagger.visible>* {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Shimmer text */
+        .shimmer-text {
+            background: linear-gradient(90deg,
+                    var(--accent) 0%,
+                    #fff 30%,
+                    var(--accent-2) 50%,
+                    #fff 70%,
+                    var(--accent) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+
         /* ============================================================
-                           ۸. Loader مینیمال
-                           ============================================================ */
+                        Loader
+                        ============================================================ */
         .page-loader {
             position: fixed;
             inset: 0;
@@ -751,45 +978,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
         .page-loader.hidden {
             opacity: 0;
             visibility: hidden;
         }
-        .loader-bar-wrap {
-            width: 55px;
-            height: 2px;
-            background: #2a2a2a;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        [data-theme="light"] .loader-bar-wrap {
-            background: #ddd;
-        }
-        .loader-bar-fill {
-            height: 100%;
-            width: 100%;
-            background: var(--accent);
-            animation: loadingSlide 1.3s ease infinite;
-        }
-        @keyframes loadingSlide {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
+        .loader-ring {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            animation: spinSlow 1s linear infinite;
         }
 
         /* ============================================================
-                           Responsive
-                           ============================================================ */
+                        Responsive
+                        ============================================================ */
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section-title {
+                font-size: var(--text-2xl);
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
+            .hamburger-btn {
+                display: flex;
+                order: 2;
+            }
+            .navbar-brand {
+                order: 1;
+            }
+            .nav-menu {
                 display: none;
                 position: fixed;
-                top: 72px;
+                top: 70px;
                 right: 0;
                 left: 0;
                 background: var(--bg-primary);
@@ -797,19 +1024,21 @@
                 padding: 2rem;
                 gap: 1.5rem;
                 border-bottom: 1px solid var(--border);
-                z-index: 998;
+                z-index: 997;
+                order: 10;
+                width: 100%;
             }
-            .nav-links.mobile-open {
+            .nav-menu.mobile-open {
                 display: flex;
-            }
-            .mobile-menu-btn {
-                display: block;
             }
             section {
                 padding: 4rem 1rem;
             }
             .section-title {
-                font-size: var(--text-2xl);
+                font-size: 1.8rem;
+            }
+            .section-desc {
+                font-size: var(--text-base);
             }
             .grid-2,
             .grid-3 {
@@ -818,15 +1047,37 @@
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .service-row {
+            .accordion-body-inner {
                 grid-template-columns: 1fr;
             }
-            .service-mini {
+            .service-mini-card {
                 border-left: none;
                 border-bottom: 1px solid var(--border);
             }
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: var(--text-lg);
+            }
+            .floating-group {
+                bottom: 1.25rem;
+                left: 1rem;
+                gap: 0.75rem;
+            }
+            .float-btn {
+                width: 48px;
+                height: 48px;
+            }
+            .float-btn .svg-icon {
+                width: 1.3em;
+                height: 1.3em;
+            }
+            .card {
+                padding: 1.75rem;
+            }
+            .footer-links {
+                gap: 1.5rem;
             }
         }
 
@@ -834,91 +1085,179 @@
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .btn-primary {
+                padding: 0.85rem 2rem;
+                font-size: var(--text-xs);
+            }
+            .btn-outline {
+                padding: 0.7rem 1.5rem;
+                font-size: var(--text-xs);
+            }
+            .navbar {
+                padding: 0 1rem;
+            }
+            .floating-group {
+                bottom: 1rem;
+                left: 0.75rem;
+                gap: 0.6rem;
+            }
+            .float-btn {
+                width: 44px;
+                height: 44px;
+            }
+            .float-btn .svg-icon {
+                width: 1.2em;
+                height: 1.2em;
+            }
+            section {
+                padding: 3rem 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- ============================================================
-                       ۸. Loader
-                       ============================================================ -->
+                    Page Loader
+                    ============================================================ -->
     <div class="page-loader" id="pageLoader">
-        <div class="loader-bar-wrap">
-            <div class="loader-bar-fill"></div>
-        </div>
+        <div class="loader-ring"></div>
     </div>
 
     <!-- ============================================================
-                       ۹. Navbar
-                       ============================================================ -->
-    <nav class="navbar" id="navbar">
-        <a href="#" class="logo">🎮 CYRAX</a>
-
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
-            <i class="fas fa-bars"></i>
+                    Floating Group - پایین سمت چپ
+                    ============================================================ -->
+    <div class="floating-group">
+        <!-- تغییر تم -->
+        <button class="float-btn float-theme" id="themeToggle" aria-label="تغییر تم">
+            <svg class="svg-icon" viewBox="0 0 24 24" id="themeIcon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
         </button>
 
-        <ul class="nav-links" id="navLinks">
+        <!-- تماس -->
+        <a href="tel:09173115680" class="float-btn float-call" title="تماس با ما">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- ============================================================
+                    Navbar
+                    ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="navbar-brand">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10,8 16,12 10,16" fill="#000"/>
+            </svg>
+            CYRAX
+        </a>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="منو">
+            <svg class="svg-icon" viewBox="0 0 24 24" style="width:1.5em;height:1.5em;">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
             <li><a href="#facilities">امکانات</a></li>
             <li><a href="#services">خدمات</a></li>
             <li><a href="#gallery">گالری</a></li>
             <li><a href="#games">بازی‌ها</a></li>
             <li><a href="#contact">تماس</a></li>
         </ul>
-
-        <button class="theme-toggle" id="themeToggle" aria-label="تغییر تم">
-            <i class="fas fa-moon"></i>
-        </button>
     </nav>
 
     <!-- ============================================================
-                       Hero
-                       ============================================================ -->
+                    Hero
+                    ============================================================ -->
     <section class="hero" id="hero">
-        <div>
+        <div class="hero-bg-glow green"></div>
+        <div class="hero-bg-glow cyan"></div>
+        <div class="hero-content">
             <p class="section-label" style="text-align:center;">Game Club</p>
-            <h1><span>CYRAX</span><br>GAME CLUB</h1>
+            <h1><span class="accent-text">CYRAX</span><br>GAME CLUB</h1>
             <p>زندگی یک بازی است؛ سطح خودت را ارتقا بده</p>
             <a href="#facilities" class="btn-primary">شروع تجربه حرفه‌ای</a>
         </div>
     </section>
 
     <!-- ============================================================
-                       امکانات
-                       ============================================================ -->
+                    امکانات
+                    ============================================================ -->
     <section id="facilities">
         <p class="section-label reveal">Facilities</p>
         <h2 class="section-title reveal">🔥 امکانات مجموعه</h2>
         <p class="section-desc reveal">هر آنچه برای یک تجربه گیمینگ حرفه‌ای نیاز دارید، در CYRAX فراهم است.</p>
 
         <div class="grid-3 stagger" id="facilitiesGrid">
-            <div class="glass-card">
-                <span class="card-icon">🎮</span>
+            <div class="card">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <rect x="2" y="4" width="20" height="12" rx="2"/>
+                        <polygon points="10,8 15,12 10,16" fill="currentColor" stroke="none"/>
+                        <line x1="6" y1="20" x2="18" y2="20"/>
+                    </svg>
+                </div>
                 <h3>PlayStation 5</h3>
                 <p>جدیدترین بازی‌های روز دنیا با بهترین کیفیت و گرافیک فوق‌العاده</p>
             </div>
-            <div class="glass-card">
-                <span class="card-icon">🖥️</span>
+            <div class="card card-cyan">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--accent-2);">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
                 <h3>Gaming PC</h3>
                 <p>سیستم‌های حرفه‌ای و قدرتمند مجهز به آخرین سخت‌افزار برای گیمرها</p>
             </div>
-            <div class="glass-card">
-                <span class="card-icon">👑</span>
+            <div class="card card-purple">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--accent-3);">
+                        <path d="M12 2l7 7v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V9z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                </div>
                 <h3>اتاق‌های VIP</h3>
                 <p>سه اتاق اختصاصی با محیطی آرام، لوکس و کاملاً حرفه‌ای</p>
             </div>
-            <div class="glass-card">
-                <span class="card-icon">📺</span>
+            <div class="card">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <rect x="2" y="3" width="20" height="15" rx="2"/>
+                        <polyline points="6,8 10,12 6,16"/>
+                        <line x1="14" y1="12" x2="18" y2="12"/>
+                    </svg>
+                </div>
                 <h3>تلویزیون 75 اینچ</h3>
                 <p>نمایشگر بزرگ با کیفیت 4K برای غرق شدن در دنیای بازی‌ها</p>
             </div>
-            <div class="glass-card">
-                <span class="card-icon">🔊</span>
+            <div class="card card-cyan">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--accent-2);">
+                        <polygon points="11,5 6,9 2,9 2,15 6,15 11,19 11,5"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                    </svg>
+                </div>
                 <h3>سیستم صوتی حرفه‌ای</h3>
                 <p>صدای فراگیر و قدرتمند که هیجان بازی را چند برابر می‌کند</p>
             </div>
-            <div class="glass-card">
-                <span class="card-icon">⚡</span>
+            <div class="card card-purple">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--accent-3);">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                </div>
                 <h3>اینترنت پرسرعت</h3>
                 <p>تجربه آنلاین روان، بدون لگ و قطعی با پهنای باند اختصاصی</p>
             </div>
@@ -926,32 +1265,43 @@
     </section>
 
     <!-- ============================================================
-                       خدمات
-                       ============================================================ -->
+                    خدمات
+                    ============================================================ -->
     <section id="services">
         <p class="section-label reveal">Services</p>
         <h2 class="section-title reveal">🎮 خدمات کلاب</h2>
 
-        <!-- Accordion: خدمات -->
-        <div class="accordion reveal">
-            <button class="accordion-trigger" onclick="toggleAccordion('servicesAcc', this)">
+        <div class="accordion-wrap reveal">
+            <button class="accordion-header" onclick="toggleAccordion('servicesAcc', this)">
                 مشاهده خدمات کلاب
-                <span class="acc-icon">+</span>
+                <span class="acc-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </span>
             </button>
-            <div class="accordion-content" id="servicesAcc">
-                <div class="service-row">
-                    <div class="service-mini">
-                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">🎂</span>
+            <div class="accordion-body" id="servicesAcc">
+                <div class="accordion-body-inner">
+                    <div class="service-mini-card">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:2.5em;height:2.5em;color:var(--accent);margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto;">
+                            <path d="M12 2l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6z"/>
+                        </svg>
                         <h3 style="font-weight:400;">برگزاری تولد</h3>
                         <p style="color:var(--text-muted);font-size:var(--text-sm);">جشن تولد در فضای گیمینگ و حرفه‌ای</p>
                     </div>
-                    <div class="service-mini">
-                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">⚽</span>
+                    <div class="service-mini-card">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:2.5em;height:2.5em;color:var(--accent);margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto;">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+                        </svg>
                         <h3 style="font-weight:400;">پخش زنده فوتبال</h3>
                         <p style="color:var(--text-muted);font-size:var(--text-sm);">تماشای مسابقات مهم روی صفحه بزرگ</p>
                     </div>
-                    <div class="service-mini">
-                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">🎬</span>
+                    <div class="service-mini-card">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:2.5em;height:2.5em;color:var(--accent);margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto;">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <polygon points="10,9 15,12 10,15" fill="currentColor" stroke="none"/>
+                        </svg>
                         <h3 style="font-weight:400;">پخش فیلم</h3>
                         <p style="color:var(--text-muted);font-size:var(--text-sm);">تجربه سینمایی با کیفیت بالا</p>
                     </div>
@@ -959,28 +1309,33 @@
             </div>
         </div>
 
-        <!-- Accordion: Offer -->
-        <div class="accordion reveal">
-            <button class="accordion-trigger" onclick="toggleAccordion('offerAcc', this)">
+        <div class="accordion-wrap reveal" style="margin-top:1rem;">
+            <button class="accordion-header" onclick="toggleAccordion('offerAcc', this)">
                 🔥 OFFER ویژه CYRAX — ۳۰٪ تخفیف ساعات طلایی
-                <span class="acc-icon">+</span>
+                <span class="acc-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </span>
             </button>
-            <div class="accordion-content" id="offerAcc" style="padding:2rem;text-align:center;">
-                <h3 style="font-weight:400;font-size:var(--text-xl);margin-bottom:1rem;">ساعات طلایی</h3>
-                <p style="font-size:var(--text-lg);color:var(--accent);margin-bottom:1.5rem;">۹ صبح تا ۴ بعدازظهر</p>
-                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎂 تولد</span>
-                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">⚽ فوتبال</span>
-                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎬 فیلم</span>
-                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎮 گیمینگ</span>
+            <div class="accordion-body" id="offerAcc">
+                <div style="padding:2rem;text-align:center;">
+                    <h3 style="font-weight:400;font-size:var(--text-xl);margin-bottom:1rem;">ساعات طلایی</h3>
+                    <p style="font-size:var(--text-lg);color:var(--accent);margin-bottom:1.5rem;">۹ صبح تا ۴ بعدازظهر</p>
+                    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                        <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);border:1px solid var(--border);">🎂 تولد</span>
+                        <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);border:1px solid var(--border);">⚽ فوتبال</span>
+                        <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);border:1px solid var(--border);">🎬 فیلم</span>
+                        <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);border:1px solid var(--border);">🎮 گیمینگ</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-                       گالری
-                       ============================================================ -->
+                    گالری
+                    ============================================================ -->
     <section id="gallery">
         <p class="section-label reveal">Gallery</p>
         <h2 class="section-title reveal">📸 گالری عکس مجموعه</h2>
@@ -989,82 +1344,147 @@
         <div class="gallery-grid reveal">
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/d41305_26photo1.jpg')">
                 <img src="https://uploadkon.ir/uploads/d41305_26photo1.jpg" alt="گالری 1" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/d86505_26photo2.jpg')">
                 <img src="https://uploadkon.ir/uploads/d86505_26photo2.jpg" alt="گالری 2" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/877705_26photo3.jpg')">
                 <img src="https://uploadkon.ir/uploads/877705_26photo3.jpg" alt="گالری 3" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/b90605_26photo4.jpg')">
                 <img src="https://uploadkon.ir/uploads/b90605_26photo4.jpg" alt="گالری 4" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/af6f05_26photo5.jpg')">
                 <img src="https://uploadkon.ir/uploads/af6f05_26photo5.jpg" alt="گالری 5" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
             <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/0ef205_26photo6.jpg')">
                 <img src="https://uploadkon.ir/uploads/0ef205_26photo6.jpg" alt="گالری 6" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-                       بازی‌ها
-                       ============================================================ -->
+                    بازی‌ها
+                    ============================================================ -->
     <section id="games">
         <p class="section-label reveal">Games</p>
         <h2 class="section-title reveal">🎮 بازی‌های موجود</h2>
 
-        <div class="accordion reveal">
-            <button class="accordion-trigger" onclick="toggleAccordion('ps5Acc', this)">
+        <div class="accordion-wrap reveal">
+            <button class="accordion-header" onclick="toggleAccordion('ps5Acc', this)">
                 🎮 بازی‌های PS5
-                <span class="acc-icon">+</span>
+                <span class="acc-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </span>
             </button>
-            <div class="accordion-content" id="ps5Acc">
-                <div class="game-row">FIFA 24 / 25</div>
-                <div class="game-row">PES 2025</div>
-                <div class="game-row">Mortal Kombat 11</div>
-                <div class="game-row">It Takes Two</div>
-                <div class="game-row">GTA V</div>
-                <div class="game-row">Spider-Man 2</div>
-                <div class="game-row">Call of Duty</div>
-                <div class="game-row">Tekken 8</div>
+            <div class="accordion-body" id="ps5Acc">
+                <div class="accordion-body-inner single-col">
+                    <div class="game-row">FIFA 24 / 25</div>
+                    <div class="game-row">PES 2025</div>
+                    <div class="game-row">Mortal Kombat 11</div>
+                    <div class="game-row">It Takes Two</div>
+                    <div class="game-row">GTA V</div>
+                    <div class="game-row">Spider-Man 2</div>
+                    <div class="game-row">Call of Duty</div>
+                    <div class="game-row">Tekken 8</div>
+                </div>
             </div>
         </div>
 
-        <div class="accordion reveal">
-            <button class="accordion-trigger" onclick="toggleAccordion('pcAcc', this)">
+        <div class="accordion-wrap reveal" style="margin-top:1rem;">
+            <button class="accordion-header" onclick="toggleAccordion('pcAcc', this)">
                 🖥️ بازی‌های PC
-                <span class="acc-icon">+</span>
+                <span class="acc-icon">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </span>
             </button>
-            <div class="accordion-content" id="pcAcc">
-                <div class="game-row">Counter Strike 2</div>
-                <div class="game-row">Call of Duty Warzone</div>
-                <div class="game-row">GTA V</div>
-                <div class="game-row">Red Dead Redemption</div>
-                <div class="game-row">Rainbow Six Siege</div>
+            <div class="accordion-body" id="pcAcc">
+                <div class="accordion-body-inner single-col">
+                    <div class="game-row">Counter Strike 2</div>
+                    <div class="game-row">Call of Duty Warzone</div>
+                    <div class="game-row">GTA V</div>
+                    <div class="game-row">Red Dead Redemption</div>
+                    <div class="game-row">Rainbow Six Siege</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-                       تماس
-                       ============================================================ -->
+                    تماس
+                    ============================================================ -->
     <section id="contact">
         <p class="section-label reveal">Contact</p>
         <h2 class="section-title reveal">📍 اطلاعات تماس</h2>
 
         <div class="grid-2 reveal" style="margin-bottom:2rem;">
-            <div class="glass-card">
-                <h3 style="color:var(--accent);font-weight:400;margin-bottom:1rem;">📍 آدرس</h3>
-                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">شیراز، معالی‌آباد، سر کوچه ۳ دکتر شریعتی، جنب رستوران احد، ساختمان پارسا، طبقه اول، واحد دوم</p>
-                <a href="#" class="btn-outline btn-sm" style="margin-top:1.25rem;">📍 مشاهده لوکیشن روی نقشه</a>
+            <div class="card">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                </div>
+                <h3 style="color:var(--accent);">📍 آدرس</h3>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.2;">شیراز، معالی‌آباد، سر کوچه ۳ دکتر شریعتی، جنب رستوران احد، ساختمان پارسا، طبقه اول، واحد دوم</p>
+                <a href="#" class="btn-outline btn-sm" style="margin-top:1.25rem;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:0.9em;height:0.9em;margin-left:0.3rem;">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                    مشاهده لوکیشن
+                </a>
             </div>
-            <div class="glass-card">
-                <h3 style="color:var(--accent);font-weight:400;margin-bottom:1rem;">📞 تماس با ما</h3>
-                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📱 ۰۹۱۷۳۱۱۵۶۸۰</p>
-                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📱 ۰۹۹۲۸۷۹۹۸۳۵</p>
-                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📸 @game_club_cyrax</p>
+            <div class="card card-cyan">
+                <div class="card-icon-wrap">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--accent-2);">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </div>
+                <h3 style="color:var(--accent-2);">📞 تماس با ما</h3>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.2;">📱 ۰۹۱۷۳۱۱۵۶۸۰</p>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.2;">📱 ۰۹۹۲۸۷۹۹۸۳۵</p>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.2;">📸 @game_club_cyrax</p>
                 <div style="display:flex;gap:0.6rem;margin-top:1.25rem;flex-wrap:wrap;">
                     <a href="https://wa.me/989369106238" target="_blank" class="btn-outline btn-sm">📲 واتساپ</a>
                     <a href="https://www.instagram.com/game_club_cyrax" target="_blank" class="btn-outline btn-sm">📸 اینستاگرام</a>
@@ -1073,9 +1493,16 @@
             </div>
         </div>
 
-        <!-- رزرو -->
-        <div class="glass-card reveal" style="max-width:500px;">
-            <h3 style="color:var(--accent);font-weight:400;margin-bottom:1.25rem;">📅 رزرو آنلاین</h3>
+        <div class="card reveal" style="max-width:500px;">
+            <div class="card-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+            </div>
+            <h3 style="color:var(--accent);margin-bottom:1.25rem;">📅 رزرو آنلاین</h3>
             <select id="serviceType" class="form-select">
                 <option value="">انتخاب نوع سرویس</option>
                 <option value="vip">اتاق VIP</option>
@@ -1091,39 +1518,48 @@
     </section>
 
     <!-- ============================================================
-                       Footer
-                       ============================================================ -->
+                    Footer
+                    ============================================================ -->
     <footer class="footer">
-        <div class="footer-logo">🎮 CYRAX GAME CLUB</div>
+        <div class="footer-logo">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="width:1.2em;height:1.2em;">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10,8 16,12 10,16" fill="#000"/>
+            </svg>
+            CYRAX GAME CLUB
+        </div>
         <p class="footer-tagline">فراتر از یک گیم کلاب معمولی</p>
         <div class="footer-links">
-            <a href="https://wa.me/989369106238" target="_blank"><i class="fab fa-whatsapp"></i> رزرو واتساپ</a>
-            <a href="https://www.instagram.com/game_club_cyrax" target="_blank"><i class="fab fa-instagram"></i> اینستاگرام</a>
-            <a href="tel:09173115680"><i class="fas fa-phone"></i> تماس سریع</a>
+            <a href="https://wa.me/989369106238" target="_blank">
+                <svg class="svg-icon svg-icon-fill" viewBox="0 0 24 24" style="width:1em;height:1em;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                رزرو واتساپ
+            </a>
+            <a href="https://www.instagram.com/game_club_cyrax" target="_blank">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                اینستاگرام
+            </a>
+            <a href="tel:09173115680">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="width:1em;height:1em;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                تماس سریع
+            </a>
         </div>
         <p class="footer-copy">© 2026 All Rights Reserved</p>
     </footer>
 
     <!-- ============================================================
-                       Image Modal
-                       ============================================================ -->
+                    Image Modal
+                    ============================================================ -->
     <div class="modal-overlay" id="imageModal">
-        <button class="modal-close" onclick="closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="closeModal()">
+            <svg class="svg-icon" viewBox="0 0 24 24" style="width:1.2em;height:1.2em;">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
         <img id="modalImage" src="" alt="پیش‌نمایش">
     </div>
 
-    <!-- ============================================================
-                       WhatsApp Float
-                       ============================================================ -->
-    <a href="https://wa.me/989369106238" target="_blank" class="whatsapp-float" title="چت در واتساپ">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- ============================================================
-                       JavaScript
-                       ============================================================ -->
     <script>
-        // ============ ۸. Page Loader ============
+        // ============ Page Loader ============
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('pageLoader').classList.add('hidden');
@@ -1131,13 +1567,12 @@
             }, 1000);
         });
 
-        // ============ ۹. Navbar Hide/Show on Scroll ============
+        // ============ Navbar Hide/Show on Scroll ============
         let lastScroll = 0;
         const navbar = document.getElementById('navbar');
-
         window.addEventListener('scroll', () => {
             const now = window.scrollY;
-            if (now > lastScroll && now > 250) {
+            if (now > lastScroll && now > 300) {
                 navbar.classList.add('hidden');
             } else {
                 navbar.classList.remove('hidden');
@@ -1146,55 +1581,54 @@
         });
 
         // ============ Mobile Menu ============
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-open');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-open');
         });
-
-        navLinks.querySelectorAll('a').forEach(link => {
+        navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('mobile-open');
-                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                navMenu.classList.remove('mobile-open');
             });
         });
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('mobile-open');
+            }
+        });
 
-        // ============ ۱۱. Theme Toggle with LocalStorage ============
+        // ============ Theme Toggle ============
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
+        const themeIcon = document.getElementById('themeIcon');
 
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('cyrax-theme', theme);
-            themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('cyrax-theme-final-v2', theme);
+            if (theme === 'light') {
+                themeIcon.innerHTML =
+                    '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+            } else {
+                themeIcon.innerHTML =
+                    '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+            }
         }
-
-        setTheme(localStorage.getItem('cyrax-theme') || 'dark');
-
+        setTheme(localStorage.getItem('cyrax-theme-final-v2') || 'dark');
         themeToggle.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme');
             setTheme(current === 'dark' ? 'light' : 'dark');
         });
 
-        // ============ ۱۰. Accordion ============
+        // ============ Accordion ============
         function toggleAccordion(contentId, trigger) {
             const content = document.getElementById(contentId);
             const isOpen = content.classList.contains('open');
-
-            // Close others
-            document.querySelectorAll('.accordion-content.open').forEach(el => {
+            document.querySelectorAll('.accordion-body.open').forEach(el => {
                 if (el.id !== contentId) {
                     el.classList.remove('open');
                     const otherTrigger = document.querySelector(`[onclick*="${el.id}"]`);
                     if (otherTrigger) otherTrigger.classList.remove('open');
                 }
             });
-
             if (isOpen) {
                 content.classList.remove('open');
                 trigger.classList.remove('open');
@@ -1202,10 +1636,11 @@
                 content.classList.add('open');
                 trigger.classList.add('open');
                 setTimeout(() => {
-                    if (content.getBoundingClientRect().bottom > window.innerHeight) {
+                    const rect = content.getBoundingClientRect();
+                    if (rect.bottom > window.innerHeight) {
                         content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
-                }, 150);
+                }, 200);
             }
         }
 
@@ -1221,11 +1656,9 @@
             document.getElementById('imageModal').classList.remove('active');
             document.body.style.overflow = '';
         }
-
         document.getElementById('imageModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
-
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') closeModal();
         });
@@ -1235,16 +1668,14 @@
             const type = document.getElementById('serviceType').value;
             const date = document.getElementById('resDate').value;
             const time = document.getElementById('resTime').value;
-
             if (!type) return alert('⚠️ لطفا نوع سرویس را انتخاب کنید');
             if (!date) return alert('⚠️ لطفا تاریخ رزرو را انتخاب کنید');
             if (!time) return alert('⚠️ لطفا ساعت رزرو را انتخاب کنید');
-
             const typeName = type === 'vip' ? 'اتاق VIP' : type === 'pc' ? 'سیستم PC' : 'سالن گیم';
             alert(`✅ رزرو با موفقیت ثبت شد!\n\n📋 ${typeName}\n📅 ${date}\n⏰ ${time}\n\n📲 جزئیات از واتساپ ارسال می‌شود.`);
         }
 
-        // ============ ۶. Intersection Observer for Reveal ============
+        // ============ Reveal Animations ============
         function initReveal() {
             const revealElements = document.querySelectorAll('.reveal, .stagger');
             const observer = new IntersectionObserver((entries) => {
@@ -1254,11 +1685,8 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
             revealElements.forEach(el => observer.observe(el));
-
-            // Also check elements already visible
             revealElements.forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight) {
                     el.classList.add('visible');
@@ -1274,16 +1702,13 @@
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
 
-        console.log('✅ CYRAX GAME CLUB — Minimal Design Loaded');
-        console.log('🎯 10+1 Features Active: Glassmorphism | Accordion | Reveal | Theme | Outline BTN | Loader | Gallery | Typography Scale | Navbar Hide | Negative Space');
+        console.log('✅ CYRAX GAME CLUB — Final Version');
+        console.log('🎯 Floating Theme + Phone (Bottom-Left) | 100% SVG | Neon Shadows | Smooth Animations');
     </script>
 </body>
 </html>
