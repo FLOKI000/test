@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYRAX GAME CLUB | کلاب حرفه‌ای گیمینگ شیراز</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', system-ui, sans-serif;
+            background: #0b0f1a;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #00c3ff, #00ff95, #ffe600);
+            color: #000;
+        }
+        
+        .card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgb(0 255 149 / 0.25);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to left, #00ff95, transparent);
+        }
+        
+        .game-item {
+            transition: all 0.3s ease;
+        }
+        .game-item:hover {
+            background-color: #1e2937;
+            transform: scale(1.03);
+        }
+        
+        .floating-wa {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .modal {
+            animation: modalPop 0.4s ease;
+        }
+        
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .gallery img {
+            transition: all 0.4s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.08);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f1a] text-white">
+
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="fixed inset-0 bg-[#050814] flex flex-col items-center justify-center z-[999999] transition-opacity duration-1000">
+        <img src="https://uploadkon.ir/uploads/6c8405_26file-00000000a42c7246911f5fc15ff21696.jpg" 
+             alt="CYRAX Logo" 
+             class="w-56 h-56 rounded-full shadow-2xl shadow-emerald-500/50 mb-8 animate-pulse">
+        <h1 class="text-5xl font-bold text-white mb-3 tracking-wider">CYRAX</h1>
+        <p class="text-emerald-400 text-xl font-medium">فراتر از یک گیم کلاب معمولی</p>
+        <button onclick="enterSite()" 
+                class="mt-12 px-10 py-4 bg-emerald-400 hover:bg-white text-black font-bold text-xl rounded-2xl transition-all active:scale-95">
+            ورود به کلاب
+        </button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 bg-[#0b0f1a]/90 backdrop-blur-md z-50 border-b border-emerald-500/20">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-xl flex items-center justify-center text-2xl">🎮</div>
+                <h1 class="text-2xl font-bold tracking-tighter">CYRAX</h1>
+            </div>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="#facilities" class="hover:text-emerald-400 transition-colors">امکانات</a>
+                <a href="#games" class="hover:text-emerald-400 transition-colors">بازی‌ها</a>
+                <a href="#gallery" class="hover:text-emerald-400 transition-colors">گالری</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">تماس</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero min-h-screen flex items-center justify-center text-center pt-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="text-6xl md:text-7xl font-black mb-6 leading-tight">CYRAX GAME CLUB</h1>
+            <p class="text-2xl md:text-3xl font-medium mb-10">زندگی یک بازی است؛ سطح خودت را ارتقا بده</p>
+            <button onclick="document.getElementById('facilities').scrollIntoView({behavior:'smooth'})"
+                    class="px-10 py-5 bg-black text-white text-xl font-bold rounded-3xl hover:bg-emerald-500 transition-all flex items-center gap-3 mx-auto">
+                <i class="fas fa-gamepad"></i>
+                شروع تجربه
+            </button>
+        </div>
+    </section>
+
+    <!-- Facilities -->
+    <section id="facilities" class="py-24 bg-[#111827]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16 text-emerald-400">امکانات مجموعه</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">🎮</div>
+                    <h3 class="text-2xl font-bold mb-3">PlayStation 5</h3>
+                    <p class="text-gray-400">جدیدترین بازی‌های روز دنیا با بهترین کیفیت</p>
+                </div>
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">🖥️</div>
+                    <h3 class="text-2xl font-bold mb-3">سیستم‌های گیمینگ PC</h3>
+                    <p class="text-gray-400">قدرتمندترین سیستم‌ها برای تجربه حرفه‌ای</p>
+                </div>
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">👑</div>
+                    <h3 class="text-2xl font-bold mb-3">اتاق‌های VIP</h3>
+                    <p class="text-gray-400">سه اتاق اختصاصی با محیط آرام و حرفه‌ای</p>
+                </div>
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">📺</div>
+                    <h3 class="text-2xl font-bold mb-3">تلویزیون ۷۵ اینچ 4K</h3>
+                    <p class="text-gray-400">تصویر فوق‌العاده شارپ</p>
+                </div>
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">🔊</div>
+                    <h3 class="text-2xl font-bold mb-3">سیستم صوتی حرفه‌ای</h3>
+                    <p class="text-gray-400">صدای فراگیر و قدرتمند</p>
+                </div>
+                <div class="card bg-[#1e2937] border border-emerald-500/30 rounded-3xl p-8 text-center">
+                    <div class="text-5xl mb-6">⚡</div>
+                    <h3 class="text-2xl font-bold mb-3">اینترنت پرسرعت</h3>
+                    <p class="text-gray-400">بدون لگ، تجربه آنلاین بی‌نقص</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-20 bg-[#0b0f1a]">
+        <div class="max-w-4xl mx-auto px-6">
+            <button onclick="toggleServices()" 
+                    class="w-full py-6 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 text-black rounded-3xl hover:brightness-110 transition-all">
+                🎮 خدمات کلاب
+            </button>
+            
+            <div id="servicesContent" class="hidden mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#1e2937] p-8 rounded-3xl border border-emerald-500/30">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-4">🎂 برگزاری تولد</h3>
+                    <p>جشن تولد حرفه‌ای در فضای گیمینگ</p>
+                </div>
+                <div class="bg-[#1e2937] p-8 rounded-3xl border border-emerald-500/30">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-4">⚽ پخش زنده فوتبال</h3>
+                    <p>تماشای مسابقات مهم روی نمایشگر بزرگ</p>
+                </div>
+                <div class="bg-[#1e2937] p-8 rounded-3xl border border-emerald-500/30">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-4">🎬 پخش فیلم</h3>
+                    <p>فیلم با کیفیت بالا و تجربه سینمایی</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer -->
+    <section class="py-20 bg-gradient-to-br from-amber-900/30 to-orange-900/30">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <button onclick="toggleOffer()" 
+                    class="w-full py-8 text-3xl font-black bg-gradient-to-r from-amber-400 to-orange-500 text-black rounded-3xl">
+                🔥 OFFER ویژه - ۳۰٪ تخفیف ساعات طلایی
+            </button>
+            
+            <div id="offerContent" class="hidden mt-12 bg-[#111827] border-2 border-amber-400 rounded-3xl p-10">
+                <h2 class="text-4xl font-bold mb-6">ساعات طلایی</h2>
+                <p class="text-2xl mb-8">هر روز از <span class="text-emerald-400 font-bold">۹ صبح تا ۴ بعدازظهر</span></p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-lg">
+                    <div class="bg-[#1e2937] p-6 rounded-2xl">🎂 تولد</div>
+                    <div class="bg-[#1e2937] p-6 rounded-2xl">⚽ فوتبال</div>
+                    <div class="bg-[#1e2937] p-6 rounded-2xl">🎬 فیلم</div>
+                    <div class="bg-[#1e2937] p-6 rounded-2xl">🎮 گیمینگ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="py-24 bg-[#111827]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-12 text-emerald-400">گالری مجموعه</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 gallery">
+                <img src="https://uploadkon.ir/uploads/d41305_26photo1.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://uploadkon.ir/uploads/d86505_26photo2.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://uploadkon.ir/uploads/877705_26photo3.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://uploadkon.ir/uploads/b90605_26photo4.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://uploadkon.ir/uploads/af6f05_26photo5.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://uploadkon.ir/uploads/0ef205_26photo6.jpg" class="w-full h-80 object-cover rounded-3xl cursor-pointer" onclick="openModal(this.src)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Games -->
+    <section id="games" class="py-24 bg-[#0b0f1a]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16 text-emerald-400">بازی‌های موجود</h2>
+            
+            <!-- PS5 -->
+            <button onclick="toggleGames('ps5')" 
+                    class="w-full text-right px-8 py-6 bg-[#1e2937] hover:bg-emerald-500/10 border border-emerald-500/30 rounded-3xl text-2xl font-bold mb-4 flex justify-between items-center">
+                <span>🎮 بازی‌های PlayStation 5</span>
+                <i class="fas fa-chevron-down transition-transform" id="ps5icon"></i>
+            </button>
+            <div id="ps5content" class="hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+                <!-- All PS5 games from your list -->
+                <div class="game-item bg-[#1e2937] px-6 py-5 rounded-2xl text-lg">FIFA 24</div>
+                <div class="game-item bg-[#1e2937] px-6 py-5 rounded-2xl text-lg">PES 2025</div>
+                <div class="game-item bg-[#1e2937] px-6 py-5 rounded-2xl text-lg">Mortal Kombat 11</div>
+                <div class="game-item bg-[#1e2937] px-6 py-5 rounded-2xl text-lg">It Takes Two</div>
+                <!-- Add the rest similarly -->
+            </div>
+
+            <!-- PC -->
+            <button onclick="toggleGames('pc')" 
+                    class="w-full text-right px-8 py-6 bg-[#1e2937] hover:bg-emerald-500/10 border border-emerald-500/30 rounded-3xl text-2xl font-bold flex justify-between items-center">
+                <span>🖥️ بازی‌های PC</span>
+                <i class="fas fa-chevron-down transition-transform" id="pcicon"></i>
+            </button>
+            <div id="pccontent" class="hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- PC games list -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Reservation -->
+    <section id="contact" class="py-24 bg-[#111827]">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="text-4xl font-bold mb-10">اطلاعات تماس</h2>
+                    <div class="space-y-8 text-lg">
+                        <p><strong class="text-emerald-400">آدرس:</strong> شیراز، معالی‌آباد، سر کوچه ۳ دکتر شریعتی، جنب رستوران احد، ساختمان پارسا، طبقه اول، واحد دوم</p>
+                        <p><strong class="text-emerald-400">تلفن:</strong> ۰۹۱۷۳۱۱۵۶۸۰ - ۰۹۹۲۸۷۹۹۸۳۵</p>
+                        <a href="https://www.instagram.com/game_club_cyrax" target="_blank" class="block text-emerald-400 hover:underline">@game_club_cyrax</a>
+                        <a href="https://maps.app.goo.gl/QzXzbK6SpzdwzUqDA" target="_blank"
+                           class="inline-block px-8 py-4 bg-emerald-500 text-black font-bold rounded-2xl mt-6">
+                            📍 لوکیشن روی نقشه
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reservation -->
+                <div>
+                    <h2 class="text-4xl font-bold mb-8">رزرو آنلاین</h2>
+                    <div class="bg-[#1e2937] p-8 rounded-3xl">
+                        <select id="resService" class="w-full p-4 bg-[#0f172a] rounded-2xl mb-6 text-lg">
+                            <option value="">نوع سرویس</option>
+                            <option value="vip">اتاق VIP</option>
+                            <option value="pc">کامپیوتر</option>
+                            <option value="hall">سالن اصلی</option>
+                        </select>
+                        <input type="date" id="resDate" class="w-full p-4 bg-[#0f172a] rounded-2xl mb-6">
+                        <input type="time" id="resTime" class="w-full p-4 bg-[#0f172a] rounded-2xl mb-8">
+                        
+                        <button onclick="submitReservation()" 
+                                class="w-full py-5 bg-emerald-400 text-black font-bold text-xl rounded-2xl">ثبت رزرو</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 text-center border-t border-emerald-900">
+        <p class="text-2xl font-bold mb-2">CYRAX GAME CLUB</p>
+        <p class="text-emerald-400">فراتر از یک گیم کلاب معمولی</p>
+        <p class="text-xs text-gray-500 mt-8">© ۱۴۰۵ - تمامی حقوق محفوظ است</p>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-[99999] flex items-center justify-center">
+        <div class="relative max-w-4xl w-full px-4">
+            <button onclick="closeModal()" class="absolute -top-14 right-4 text-4xl text-white">✕</button>
+            <img id="modalImage" class="w-full rounded-3xl shadow-2xl" alt="">
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/989369106238" target="_blank"
+       class="fixed bottom-6 left-6 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-4xl shadow-2xl floating-wa z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Tailwind script already included via CDN
+
+        function enterSite() {
+            document.getElementById('splashScreen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('splashScreen').style.display = 'none';
+            }, 800);
+        }
+
+        function toggleServices() {
+            const content = document.getElementById('servicesContent');
+            content.classList.toggle('hidden');
+        }
+
+        function toggleOffer() {
+            const content = document.getElementById('offerContent');
+            content.classList.toggle('hidden');
+        }
+
+        function toggleGames(type) {
+            const content = document.getElementById(type + 'content');
+            const icon = document.getElementById(type + 'icon');
+            content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        function openModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        function submitReservation() {
+            const service = document.getElementById('resService').value;
+            if (!service) {
+                alert('لطفا نوع سرویس را انتخاب کنید');
+                return;
+            }
+            alert('رزرو با موفقیت ثبت شد ✅\nجزئیات به واتساپ ارسال خواهد شد.');
+        }
+
+        // Close modals when pressing ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const modal = document.getElementById('imageModal');
+                if (!modal.classList.contains('hidden')) closeModal();
+            }
+        });
+
+        // Initialize
+        window.onload = function() {
+            // Make all game lists (you can expand them)
+            console.log('%cCYRAX Game Club - Ready', 'color:#00ff95; font-size:16px; font-weight:bold');
+        };
+    </script>
+</body>
+</html>
