@@ -1,468 +1,1289 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYRAX GAME CLUB | کلاب حرفه‌ای گیمینگ شیراز</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
 
-        /* ۱. تایپوگرافی مینیمال و بهینه‌سازی فونت */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Vazirmatn', system-ui, sans-serif;
-            scroll-behavior: smooth;
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Vazirmatn Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+                           ۱. پالت رنگی مونوکروم + Accent
+                           ============================================================ */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0f0f0f;
+            --bg-elevated: #1a1a1a;
+            --bg-hover: #222222;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --accent-glow: rgba(0, 255, 136, 0.2);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(0, 255, 136, 0.25);
+            --radius-sm: 12px;
+            --radius: 20px;
+            --radius-lg: 28px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-main: 'Vazirmatn', system-ui, sans-serif;
+
+            /* ============================================================
+                               ۳. تایپوگرافی Scale System (Major Third)
+                               ============================================================ */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 2rem;
+            --text-3xl: 2.5rem;
+            --text-hero: clamp(3rem, 8vw, 6.5rem);
         }
 
-        /* ۲. پالت رنگی مونوکروم و خنثی با قانون ۶۰-۳۰-۱۰ */
-        :root {
-            --bg-main: #0b0f19;
-            --bg-card: #131a2a;
-            --text-muted: #94a3b8;
-            --accent: #10b981; /* ۱۰٪ رنگ تاکید برای دکمه‌ها و عناصر کلیدی */
-            --accent-hover: #059669;
+        /* ============================================================
+                           ۱۱. تم روشن
+                           ============================================================ */
+        [data-theme="light"] {
+            --bg-primary: #fafafa;
+            --bg-secondary: #f0f0f0;
+            --bg-elevated: #ffffff;
+            --bg-hover: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #525252;
+            --text-muted: #737373;
+            --border: rgba(0, 0, 0, 0.06);
+            --border-hover: rgba(0, 180, 100, 0.3);
+            --accent-dim: rgba(0, 200, 100, 0.06);
+            --accent-glow: rgba(0, 200, 100, 0.15);
+        }
+
+        /* ============================================================
+                           Global Reset
+                           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: #f8fafc;
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.7;
+            overflow-x: hidden;
+            transition: background var(--transition), color var(--transition);
         }
 
-        /* ۴. حذف مرزهای خشن و استفاده از سایه‌های بسیار ملایم (Soft Shadow) */
-        .minimal-card {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            /* ۵. ترانزیشن‌های ظریف و کوتاه */
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
 
-        .minimal-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(16, 185, 129, 0.3);
+        /* ============================================================
+                           ۹. ناوبری مخفی/ظاهر شونده
+                           ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), background var(--transition), border var(--transition);
         }
 
-        /* دکمه‌های مینیمال با افکت متمایز کننده محو */
-        .btn-minimal {
-            transition: all 0.2s ease-in-out;
+        [data-theme="light"] .navbar {
+            background: rgba(250, 250, 250, 0.85);
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            font-size: var(--text-xl);
+            font-weight: 900;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 400;
+            transition: color var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        /* ============================================================
+                           ۲. فضای منفی (سخاوتمندانه)
+                           ============================================================ */
+        section {
+            padding: 7rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: var(--text-xs);
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: var(--text-3xl);
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: var(--text-lg);
+            font-weight: 300;
+            max-width: 600px;
+            margin-bottom: 4rem;
+            line-height: 1.9;
+        }
+
+        /* ============================================================
+                           Hero
+                           ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 72px;
+        }
+
+        .hero h1 {
+            font-size: var(--text-hero);
+            font-weight: 100;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================================
+                           ۴. کارت‌های شیشه‌ای (Glassmorphism)
+                           ============================================================ */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            transition: all 0.45s ease;
             position: relative;
             overflow: hidden;
         }
-        .btn-minimal:hover {
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-            transform: translateY(-1px);
+
+        [data-theme="light"] .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        /* ساختار گالری عکس بدون شلوغی */
-        .gallery-img {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .gallery-img:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(0, 255, 136, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -20px rgba(0, 255, 136, 0.08);
         }
 
-        /* انیمیشن‌های ظریف برای بارگذاری صفحه */
-        .fade-in {
+        [data-theme="light"] .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-card .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .glass-card h3 {
+            font-weight: 400;
+            font-size: var(--text-lg);
+            margin-bottom: 0.6rem;
+        }
+
+        .glass-card p {
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        /* ============================================================
+                           ۵. دکمه‌های Outline + Hover Fill
+                           ============================================================ */
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 100px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            font-family: var(--font-main);
+            letter-spacing: 0.03em;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+            border-radius: 100px;
+            font-size: var(--text-sm);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            font-family: var(--font-main);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        [data-theme="light"] .btn-outline {
+            border: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: #000;
+        }
+        .btn-outline:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-sm {
+            padding: 0.6rem 1.6rem;
+            font-size: var(--text-xs);
+        }
+
+        /* ============================================================
+                           ۱۰. Accordion مینیمال
+                           ============================================================ */
+        .accordion {
+            margin-bottom: 1rem;
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            padding: 1.3rem 1.75rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: var(--text-base);
+            cursor: pointer;
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition);
+            font-family: var(--font-main);
+        }
+
+        .accordion-trigger:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+        }
+
+        .accordion-trigger .acc-icon {
+            transition: transform 0.35s ease;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .accordion-trigger.open {
+            border-color: var(--accent);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .accordion-trigger.open .acc-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-elevated);
+            border: 1px solid transparent;
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        .accordion-content.open {
+            max-height: 600px;
+            border-color: var(--border);
+        }
+
+        .accordion-content .game-row {
+            padding: 1.1rem 1.75rem;
+            border-bottom: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: default;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+        .accordion-content .game-row:last-child {
+            border-bottom: none;
+        }
+        .accordion-content .game-row:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            padding-right: 2.5rem;
+        }
+
+        /* Service mini cards inside accordion */
+        .service-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .service-mini {
+            padding: 2rem;
+            text-align: center;
+            border-left: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .service-mini:last-child {
+            border-left: none;
+        }
+        .service-mini:hover {
+            background: var(--bg-hover);
+        }
+
+        /* ============================================================
+                           ۷. گالری با Hover Reveal
+                           ============================================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+            transition: border var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent);
+        }
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.04);
+        }
+
+        .gallery-item::after {
+            content: '+';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 100;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.45);
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
-        .fade-in.visible {
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* ============================================================
+                           Form Inputs
+                           ============================================================ */
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: var(--text-sm);
+            transition: all var(--transition);
+            margin-bottom: 1rem;
+        }
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-dim);
+        }
+        .form-select option {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        /* ============================================================
+                           Modal
+                           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay img {
+            max-height: 90vh;
+            max-width: 90vw;
+            border-radius: var(--radius-sm);
+        }
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ============================================================
+                           WhatsApp Float
+                           ============================================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 54px;
+            height: 54px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: all var(--transition);
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.12);
+            box-shadow: 0 14px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        /* ============================================================
+                           Footer
+                           ============================================================ */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 5rem 2rem;
+            text-align: center;
+            background: var(--bg-secondary);
+        }
+        .footer-logo {
+            font-size: var(--text-2xl);
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .footer-tagline {
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+            font-size: var(--text-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: var(--text-xs);
+            opacity: 0.5;
+        }
+
+        /* ============================================================
+                           ۶. انیمیشن Reveal (Intersection Observer)
+                           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* پنهان‌سازی ساده آکاردئون‌ها با انیمیشن ارتفاع */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Stagger */
+        .stagger>* {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .accordion-content.open {
-            max-height: 500px;
+        .stagger.visible>*:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .stagger.visible>*:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+        .stagger.visible>*:nth-child(3) {
+            transition-delay: 0.25s;
+        }
+        .stagger.visible>*:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+        .stagger.visible>*:nth-child(5) {
+            transition-delay: 0.45s;
+        }
+        .stagger.visible>*:nth-child(6) {
+            transition-delay: 0.55s;
+        }
+        .stagger.visible>* {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+                           ۸. Loader مینیمال
+                           ============================================================ */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-bar-wrap {
+            width: 55px;
+            height: 2px;
+            background: #2a2a2a;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        [data-theme="light"] .loader-bar-wrap {
+            background: #ddd;
+        }
+        .loader-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--accent);
+            animation: loadingSlide 1.3s ease infinite;
+        }
+        @keyframes loadingSlide {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* ============================================================
+                           Responsive
+                           ============================================================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 72px;
+                right: 0;
+                left: 0;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+                z-index: 998;
+            }
+            .nav-links.mobile-open {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            section {
+                padding: 4rem 1rem;
+            }
+            .section-title {
+                font-size: var(--text-2xl);
+            }
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .service-row {
+                grid-template-columns: 1fr;
+            }
+            .service-mini {
+                border-left: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div id="splash" class="fixed inset-0 bg-[#05070f] flex flex-col items-center justify-center z-[99999] transition-opacity duration-700">
-        <div class="text-center">
-            <img src="https://uploadkon.ir/uploads/6c8405_26file-00000000a42c7246911f5fc15ff21696.jpg" 
-                 class="w-32 h-32 rounded-full mx-auto mb-6 opacity-90 grayscale hover:grayscale-0 transition duration-500" alt="logo">
-            <h1 class="text-4xl font-light tracking-widest text-white mb-2">CYRAX</h1>
-            <p class="text-emerald-400 text-sm tracking-wider font-light">فراتر از یک گیم کلاب معمولی</p>
-            <button id="btn-enter" class="mt-12 px-8 py-3 border border-emerald-500/30 text-emerald-400 rounded-xl text-sm font-medium btn-minimal bg-emerald-500/5">
-                ورود به کلاب
-            </button>
+    <!-- ============================================================
+                       ۸. Loader
+                       ============================================================ -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-bar-wrap">
+            <div class="loader-bar-fill"></div>
         </div>
     </div>
 
-    <nav class="fixed top-0 w-full bg-[#0b0f19]/80 backdrop-blur-md z-50 border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <span class="text-2xl text-emerald-400">🎮</span>
-                <span class="text-xl font-bold tracking-wider text-white">CYRAX</span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
-                <a href="#facilities" class="hover:text-white transition">امکانات</a>
-                <a href="#services" class="hover:text-white transition">خدمات</a>
-                <a href="#gallery" class="hover:text-white transition">گالری</a>
-                <a href="#games" class="hover:text-white transition">بازی‌ها</a>
-                <a href="#contact" class="hover:text-white transition">تماس با ما</a>
-            </div>
-            <a href="https://wa.me/989369106238" target="_blank"
-               class="bg-emerald-500 text-black px-5 py-2 rounded-xl text-xs font-bold btn-minimal">
-                رزرو سریع واتساپ
-            </a>
-        </div>
+    <!-- ============================================================
+                       ۹. Navbar
+                       ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">🎮 CYRAX</a>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#facilities">امکانات</a></li>
+            <li><a href="#services">خدمات</a></li>
+            <li><a href="#gallery">گالری</a></li>
+            <li><a href="#games">بازی‌ها</a></li>
+            <li><a href="#contact">تماس</a></li>
+        </ul>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="تغییر تم">
+            <i class="fas fa-moon"></i>
+        </button>
     </nav>
 
-    <section class="min-h-screen flex items-center justify-center pt-20 relative px-6">
-        <div class="max-w-3xl mx-auto text-center fade-in">
-            <span class="text-xs tracking-widest text-emerald-400 font-bold uppercase border border-emerald-500/20 px-3 py-1 rounded-full bg-emerald-500/5">
-                🎮 CYRAX GAME CLUB
-            </span>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-snug mt-6 mb-6">
-                زندگی یک بازی است؛ <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">سطح خودت را ارتقا بده</span>
-            </h1>
-            <p class="text-base md:text-lg text-slate-400 font-light max-w-xl mx-auto mb-10">
-                فراتر از یک گیم کلاب معمولی. بالاترین نرخ فریم، حرفه‌ای‌ترین تجهیزات و محیطی اختصاصی برای گیمرهای واقعی در شیراز.
-            </p>
-            <a href="#facilities" class="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 border border-white/10 hover:border-emerald-500/50 text-white rounded-xl text-sm font-medium btn-minimal">
-                مشاهده امکانات <i class="fas fa-chevron-down text-xs text-emerald-400"></i>
-            </a>
+    <!-- ============================================================
+                       Hero
+                       ============================================================ -->
+    <section class="hero" id="hero">
+        <div>
+            <p class="section-label" style="text-align:center;">Game Club</p>
+            <h1><span>CYRAX</span><br>GAME CLUB</h1>
+            <p>زندگی یک بازی است؛ سطح خودت را ارتقا بده</p>
+            <a href="#facilities" class="btn-primary">شروع تجربه حرفه‌ای</a>
         </div>
     </section>
 
-    <section id="facilities" class="py-24 border-t border-white/5 bg-[#0e1422]">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl font-bold text-white mb-3">🔥 امکانات مجموعه</h2>
-                <p class="text-slate-400 text-sm">تجهیزات و سخت‌افزارهایی که تجربه بازی شما را دگرگون می‌کنند</p>
+    <!-- ============================================================
+                       امکانات
+                       ============================================================ -->
+    <section id="facilities">
+        <p class="section-label reveal">Facilities</p>
+        <h2 class="section-title reveal">🔥 امکانات مجموعه</h2>
+        <p class="section-desc reveal">هر آنچه برای یک تجربه گیمینگ حرفه‌ای نیاز دارید، در CYRAX فراهم است.</p>
+
+        <div class="grid-3 stagger" id="facilitiesGrid">
+            <div class="glass-card">
+                <span class="card-icon">🎮</span>
+                <h3>PlayStation 5</h3>
+                <p>جدیدترین بازی‌های روز دنیا با بهترین کیفیت و گرافیک فوق‌العاده</p>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">🎮</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">PlayStation 5</h3>
-                    <p class="text-slate-400 text-sm font-light">جدیدترین بازی‌های روز دنیا با بهترین کیفیت.</p>
-                </div>
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">🖥️</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">Gaming PC</h3>
-                    <p class="text-slate-400 text-sm font-light">سیستم‌های حرفه‌ای و قدرتمند برای گیمرها.</p>
-                </div>
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">👑</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">اتاق‌های VIP</h3>
-                    <p class="text-slate-400 text-sm font-light">سه اتاق اختصاصی با محیطی آرام و حرفه‌ای.</p>
-                </div>
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">📺</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">تلویزیون 75 اینچ</h3>
-                    <p class="text-slate-400 text-sm font-light">کیفیت فوق‌العاده 4K.</p>
-                </div>
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">🔊</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">سیستم صوتی حرفه‌ای</h3>
-                    <p class="text-slate-400 text-sm font-light">صدایی قدرتمند و هیجان‌انگیز.</p>
-                </div>
-                <div class="minimal-card p-8 fade-in">
-                    <div class="text-3xl mb-4 text-emerald-400">⚡</div>
-                    <h3 class="text-lg font-bold mb-2 text-white">اینترنت پرسرعت</h3>
-                    <p class="text-slate-400 text-sm font-light">تجربه آنلاین روان و بدون لگ.</p>
-                </div>
+            <div class="glass-card">
+                <span class="card-icon">🖥️</span>
+                <h3>Gaming PC</h3>
+                <p>سیستم‌های حرفه‌ای و قدرتمند مجهز به آخرین سخت‌افزار برای گیمرها</p>
+            </div>
+            <div class="glass-card">
+                <span class="card-icon">👑</span>
+                <h3>اتاق‌های VIP</h3>
+                <p>سه اتاق اختصاصی با محیطی آرام، لوکس و کاملاً حرفه‌ای</p>
+            </div>
+            <div class="glass-card">
+                <span class="card-icon">📺</span>
+                <h3>تلویزیون 75 اینچ</h3>
+                <p>نمایشگر بزرگ با کیفیت 4K برای غرق شدن در دنیای بازی‌ها</p>
+            </div>
+            <div class="glass-card">
+                <span class="card-icon">🔊</span>
+                <h3>سیستم صوتی حرفه‌ای</h3>
+                <p>صدای فراگیر و قدرتمند که هیجان بازی را چند برابر می‌کند</p>
+            </div>
+            <div class="glass-card">
+                <span class="card-icon">⚡</span>
+                <h3>اینترنت پرسرعت</h3>
+                <p>تجربه آنلاین روان، بدون لگ و قطعی با پهنای باند اختصاصی</p>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-24 border-t border-white/5">
-        <div class="max-w-3xl mx-auto px-6 space-y-4">
-            
-            <div class="fade-in">
-                <button data-target="servicesBox" class="accordion-trigger w-full flex justify-between items-center p-5 bg-[#131a2a] hover:bg-[#182238] rounded-xl text-base font-bold text-white transition">
-                    <span>🎮 خدمات کلاب</span>
-                    <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
-                </button>
-                <div id="servicesBox" class="accordion-content">
-                    <div class="grid sm:grid-cols-3 gap-4 p-5 bg-[#0e1422] rounded-b-xl border-x border-b border-white/5">
-                        <div class="p-4 bg-[#131a2a] rounded-lg text-center">
-                            <h4 class="text-emerald-400 font-bold text-sm mb-1">🎂 برگزاری تولد</h4>
-                            <p class="text-xs text-slate-400">جشن تولد در فضای گیمینگ</p>
-                        </div>
-                        <div class="p-4 bg-[#131a2a] rounded-lg text-center">
-                            <h4 class="text-emerald-400 font-bold text-sm mb-1">⚽ پخش زنده فوتبال</h4>
-                            <p class="text-xs text-slate-400">مسابقات مهم روی صفحه بزرگ</p>
-                        </div>
-                        <div class="p-4 bg-[#131a2a] rounded-lg text-center">
-                            <h4 class="text-emerald-400 font-bold text-sm mb-1">🎬 پخش فیلم</h4>
-                            <p class="text-xs text-slate-400">تجربه سینمایی با کیفیت بالا</p>
-                        </div>
+    <!-- ============================================================
+                       خدمات
+                       ============================================================ -->
+    <section id="services">
+        <p class="section-label reveal">Services</p>
+        <h2 class="section-title reveal">🎮 خدمات کلاب</h2>
+
+        <!-- Accordion: خدمات -->
+        <div class="accordion reveal">
+            <button class="accordion-trigger" onclick="toggleAccordion('servicesAcc', this)">
+                مشاهده خدمات کلاب
+                <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-content" id="servicesAcc">
+                <div class="service-row">
+                    <div class="service-mini">
+                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">🎂</span>
+                        <h3 style="font-weight:400;">برگزاری تولد</h3>
+                        <p style="color:var(--text-muted);font-size:var(--text-sm);">جشن تولد در فضای گیمینگ و حرفه‌ای</p>
+                    </div>
+                    <div class="service-mini">
+                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">⚽</span>
+                        <h3 style="font-weight:400;">پخش زنده فوتبال</h3>
+                        <p style="color:var(--text-muted);font-size:var(--text-sm);">تماشای مسابقات مهم روی صفحه بزرگ</p>
+                    </div>
+                    <div class="service-mini">
+                        <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">🎬</span>
+                        <h3 style="font-weight:400;">پخش فیلم</h3>
+                        <p style="color:var(--text-muted);font-size:var(--text-sm);">تجربه سینمایی با کیفیت بالا</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="fade-in">
-                <button data-target="offerBox" class="accordion-trigger w-full flex justify-between items-center p-5 bg-[#131a2a] hover:bg-[#182238] rounded-xl text-base font-bold text-rose-400 transition border border-rose-500/10">
-                    <span>🔥 OFFER ویژه CYRAX</span>
-                    <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
-                </button>
-                <div id="offerBox" class="accordion-content">
-                    <div class="p-6 bg-[#0e1422] rounded-b-xl border-x border-b border-rose-500/10 text-center space-y-4">
-                        <h4 class="text-xl font-bold text-white">۳۰٪ تخفیف ساعات طلایی</h4>
-                        <p class="text-rose-400 text-lg font-medium">۹ صبح تا ۴ بعدازظهر</p>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300 pt-2">
-                            <div class="bg-[#131a2a] p-3 rounded-lg border border-white/5">🎂 تولد</div>
-                            <div class="bg-[#131a2a] p-3 rounded-lg border border-white/5">⚽ فوتبال</div>
-                            <div class="bg-[#131a2a] p-3 rounded-lg border border-white/5">🎬 فیلم</div>
-                            <div class="bg-[#131a2a] p-3 rounded-lg border border-white/5">🎮 گیمینگ</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="gallery" class="py-24 border-t border-white/5 bg-[#0e1422]">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="mb-12 fade-in">
-                <h2 class="text-3xl font-bold text-white mb-2">📸 گالری عکس مجموعه</h2>
-                <p class="text-slate-400 text-sm">مشاهده گالری عکس مجموعه</p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 fade-in">
-                <img src="https://uploadkon.ir/uploads/d41305_26photo1.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 1">
-                <img src="https://uploadkon.ir/uploads/d86505_26photo2.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 2">
-                <img src="https://uploadkon.ir/uploads/877705_26photo3.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 3">
-                <img src="https://uploadkon.ir/uploads/b90605_26photo4.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 4">
-                <img src="https://uploadkon.ir/uploads/af6f05_26photo5.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 5">
-                <img src="https://uploadkon.ir/uploads/0ef205_26photo6.jpg" class="gallery-img w-full h-48 object-cover rounded-xl cursor-pointer bg-[#131a2a]" alt="Cyrax Club 6">
             </div>
         </div>
-    </section>
 
-    <section id="games" class="py-24 border-t border-white/5">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-white text-center mb-12 fade-in">🎮 بازی‌های موجود</h2>
-            
-            <div class="space-y-4">
-                <div>
-                    <button data-target="ps5Games" class="accordion-trigger w-full flex justify-between items-center p-4 bg-[#131a2a] rounded-xl text-sm font-bold text-slate-200 transition">
-                        <span>🎮 بازی‌های PS5</span>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-                    </button>
-                    <div id="ps5Games" class="accordion-content">
-                        <div class="p-2 grid grid-cols-2 gap-2 bg-[#0e1422] border-x border-b border-white/5 rounded-b-xl text-xs text-slate-400">
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">FIFA 24 / 25</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">PES 2025</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Mortal Kombat 11</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">It Takes Two</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">GTA V</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Spider-Man 2</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Call of Duty</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Tekken 8</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <button data-target="pcGames" class="accordion-trigger w-full flex justify-between items-center p-4 bg-[#131a2a] rounded-xl text-sm font-bold text-slate-200 transition">
-                        <span>🖥️ بازی‌های PC</span>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-                    </button>
-                    <div id="pcGames" class="accordion-content">
-                        <div class="p-2 grid grid-cols-2 gap-2 bg-[#0e1422] border-x border-b border-white/5 rounded-b-xl text-xs text-slate-400">
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Counter Strike 2</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Call of Duty Warzone</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">GTA V</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Red Dead Redemption</div>
-                            <div class="p-3 bg-[#131a2a]/50 rounded-lg">Rainbow Six Siege</div>
-                        </div>
-                    </div>
+        <!-- Accordion: Offer -->
+        <div class="accordion reveal">
+            <button class="accordion-trigger" onclick="toggleAccordion('offerAcc', this)">
+                🔥 OFFER ویژه CYRAX — ۳۰٪ تخفیف ساعات طلایی
+                <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-content" id="offerAcc" style="padding:2rem;text-align:center;">
+                <h3 style="font-weight:400;font-size:var(--text-xl);margin-bottom:1rem;">ساعات طلایی</h3>
+                <p style="font-size:var(--text-lg);color:var(--accent);margin-bottom:1.5rem;">۹ صبح تا ۴ بعدازظهر</p>
+                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎂 تولد</span>
+                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">⚽ فوتبال</span>
+                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎬 فیلم</span>
+                    <span style="padding:0.5rem 1.5rem;background:var(--bg-secondary);border-radius:100px;font-size:var(--text-sm);">🎮 گیمینگ</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-24 border-t border-white/5 bg-[#0e1422]">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-start">
-                
-                <div class="space-y-6 fade-in">
-                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                        <span>📍</span> اطلاعات تماس
-                    </h3>
-                    <div class="text-sm text-slate-400 space-y-4">
-                        <p class="leading-relaxed">
-                            <strong class="text-white block mb-1">آدرس:</strong>
-                            شیراز، معالی‌آباد، سر کوچه ۳ دکتر شریعتی، جنب رستوران احد، ساختمان پارسا، طبقه اول، واحد دوم
-                        </p>
-                        <p>
-                            <strong class="text-white">تلفن ۱:</strong> 
-                            <a href="tel:09173115680" class="hover:text-emerald-400 transition ml-4 font-mono">09173115680</a>
-                        </p>
-                        <p>
-                            <strong class="text-white">تلفن ۲:</strong> 
-                            <a href="tel:09928799835" class="hover:text-emerald-400 transition ml-4 font-mono">09928799835</a>
-                        </p>
-                        <p>
-                            <strong class="text-white">اینستاگرام:</strong> 
-                            <a href="https://www.instagram.com/game_club_cyrax" target="_blank" class="hover:text-emerald-400 transition font-mono">@game_club_cyrax</a>
-                        </p>
-                    </div>
+    <!-- ============================================================
+                       گالری
+                       ============================================================ -->
+    <section id="gallery">
+        <p class="section-label reveal">Gallery</p>
+        <h2 class="section-title reveal">📸 گالری عکس مجموعه</h2>
+        <p class="section-desc reveal">مشاهده گالری عکس مجموعه</p>
 
-                    <a href="https://maps.google.com/?q=Shiraz+Maali+Abad+Dr+Shariati" target="_blank" 
-                       class="inline-block w-full text-center py-3 bg-white/5 border border-white/10 text-white rounded-xl text-xs font-medium btn-minimal">
-                        📍 مشاهده لوکیشن روی نقشه
-                    </a>
-                </div>
-
-                <div class="bg-[#131a2a] p-6 rounded-2xl border border-white/5 fade-in">
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                        <span>📅</span> رزرو آنلاین
-                    </h3>
-                    
-                    <div class="space-y-4 text-xs">
-                        <div>
-                            <label class="block text-slate-400 mb-2 font-medium">نوع سرویس</label>
-                            <select id="serviceType" class="w-full p-3.5 bg-[#0b0f19] border border-white/5 text-white rounded-xl focus:border-emerald-500/50 focus:outline-none transition">
-                                <option value="">انتخاب کنید</option>
-                                <option value="vip">اتاق VIP</option>
-                                <option value="pc">سیستم PC</option>
-                                <option value="hall">سالن گیم</option>
-                            </select>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-slate-400 mb-2 font-medium">تاریخ رزرو</label>
-                                <input type="date" id="resDate" class="w-full p-3 bg-[#0b0f19] border border-white/5 text-slate-400 rounded-xl focus:border-emerald-500/50 focus:outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-slate-400 mb-2 font-medium">ساعت رزرو</label>
-                                <input type="time" id="resTime" class="w-full p-3 bg-[#0b0f19] border border-white/5 text-slate-400 rounded-xl focus:border-emerald-500/50 focus:outline-none transition">
-                            </div>
-                        </div>
-
-                        <button id="btn-reserve" class="w-full py-3.5 bg-emerald-500 text-black font-bold rounded-xl text-sm btn-minimal mt-4">
-                            ثبت رزرو
-                        </button>
-                    </div>
-                </div>
-
+        <div class="gallery-grid reveal">
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/d41305_26photo1.jpg')">
+                <img src="https://uploadkon.ir/uploads/d41305_26photo1.jpg" alt="گالری 1" loading="lazy">
             </div>
-
-            <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm font-medium">
-                <a href="https://wa.me/989369106238" target="_blank" class="flex items-center justify-center gap-2 py-4 bg-emerald-500/5 border border-emerald-500/20 text-emerald-400 rounded-xl btn-minimal">
-                    <i class="fab fa-whatsapp text-lg"></i> 📲 رزرو واتساپ
-                </a>
-                <a href="https://www.instagram.com/game_club_cyrax" target="_blank" class="flex items-center justify-center gap-2 py-4 bg-rose-500/5 border border-rose-500/20 text-rose-400 rounded-xl btn-minimal">
-                    <i class="fab fa-instagram text-lg"></i> 📸 اینستاگرام
-                </a>
-                <a href="tel:09173115680" class="flex items-center justify-center gap-2 py-4 bg-blue-500/5 border border-blue-500/20 text-blue-400 rounded-xl btn-minimal">
-                    <i class="fas fa-phone-alt text-base"></i> 📞 تماس سریع
-                </a>
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/d86505_26photo2.jpg')">
+                <img src="https://uploadkon.ir/uploads/d86505_26photo2.jpg" alt="گالری 2" loading="lazy">
             </div>
-
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/877705_26photo3.jpg')">
+                <img src="https://uploadkon.ir/uploads/877705_26photo3.jpg" alt="گالری 3" loading="lazy">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/b90605_26photo4.jpg')">
+                <img src="https://uploadkon.ir/uploads/b90605_26photo4.jpg" alt="گالری 4" loading="lazy">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/af6f05_26photo5.jpg')">
+                <img src="https://uploadkon.ir/uploads/af6f05_26photo5.jpg" alt="گالری 5" loading="lazy">
+            </div>
+            <div class="gallery-item" onclick="openModal('https://uploadkon.ir/uploads/0ef205_26photo6.jpg')">
+                <img src="https://uploadkon.ir/uploads/0ef205_26photo6.jpg" alt="گالری 6" loading="lazy">
+            </div>
         </div>
     </section>
 
-    <footer class="bg-[#05070f] py-12 text-center border-t border-white/5">
-        <h2 class="text-lg font-bold text-white mb-1">🎮 CYRAX GAME CLUB</h2>
-        <p class="text-xs text-slate-500 mb-6">فراتر از یک گیم کلاب معمولی</p>
-        <p class="text-[10px] text-slate-600 font-mono tracking-widest">© 2026 All Rights Reserved</p>
+    <!-- ============================================================
+                       بازی‌ها
+                       ============================================================ -->
+    <section id="games">
+        <p class="section-label reveal">Games</p>
+        <h2 class="section-title reveal">🎮 بازی‌های موجود</h2>
+
+        <div class="accordion reveal">
+            <button class="accordion-trigger" onclick="toggleAccordion('ps5Acc', this)">
+                🎮 بازی‌های PS5
+                <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-content" id="ps5Acc">
+                <div class="game-row">FIFA 24 / 25</div>
+                <div class="game-row">PES 2025</div>
+                <div class="game-row">Mortal Kombat 11</div>
+                <div class="game-row">It Takes Two</div>
+                <div class="game-row">GTA V</div>
+                <div class="game-row">Spider-Man 2</div>
+                <div class="game-row">Call of Duty</div>
+                <div class="game-row">Tekken 8</div>
+            </div>
+        </div>
+
+        <div class="accordion reveal">
+            <button class="accordion-trigger" onclick="toggleAccordion('pcAcc', this)">
+                🖥️ بازی‌های PC
+                <span class="acc-icon">+</span>
+            </button>
+            <div class="accordion-content" id="pcAcc">
+                <div class="game-row">Counter Strike 2</div>
+                <div class="game-row">Call of Duty Warzone</div>
+                <div class="game-row">GTA V</div>
+                <div class="game-row">Red Dead Redemption</div>
+                <div class="game-row">Rainbow Six Siege</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+                       تماس
+                       ============================================================ -->
+    <section id="contact">
+        <p class="section-label reveal">Contact</p>
+        <h2 class="section-title reveal">📍 اطلاعات تماس</h2>
+
+        <div class="grid-2 reveal" style="margin-bottom:2rem;">
+            <div class="glass-card">
+                <h3 style="color:var(--accent);font-weight:400;margin-bottom:1rem;">📍 آدرس</h3>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">شیراز، معالی‌آباد، سر کوچه ۳ دکتر شریعتی، جنب رستوران احد، ساختمان پارسا، طبقه اول، واحد دوم</p>
+                <a href="#" class="btn-outline btn-sm" style="margin-top:1.25rem;">📍 مشاهده لوکیشن روی نقشه</a>
+            </div>
+            <div class="glass-card">
+                <h3 style="color:var(--accent);font-weight:400;margin-bottom:1rem;">📞 تماس با ما</h3>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📱 ۰۹۱۷۳۱۱۵۶۸۰</p>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📱 ۰۹۹۲۸۷۹۹۸۳۵</p>
+                <p style="color:var(--text-muted);font-size:var(--text-sm);line-height:2.1;">📸 @game_club_cyrax</p>
+                <div style="display:flex;gap:0.6rem;margin-top:1.25rem;flex-wrap:wrap;">
+                    <a href="https://wa.me/989369106238" target="_blank" class="btn-outline btn-sm">📲 واتساپ</a>
+                    <a href="https://www.instagram.com/game_club_cyrax" target="_blank" class="btn-outline btn-sm">📸 اینستاگرام</a>
+                    <a href="tel:09173115680" class="btn-outline btn-sm">📞 تماس</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- رزرو -->
+        <div class="glass-card reveal" style="max-width:500px;">
+            <h3 style="color:var(--accent);font-weight:400;margin-bottom:1.25rem;">📅 رزرو آنلاین</h3>
+            <select id="serviceType" class="form-select">
+                <option value="">انتخاب نوع سرویس</option>
+                <option value="vip">اتاق VIP</option>
+                <option value="pc">سیستم PC</option>
+                <option value="hall">سالن گیم</option>
+            </select>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <input type="date" id="resDate" class="form-input">
+                <input type="time" id="resTime" class="form-input">
+            </div>
+            <button onclick="handleReserve()" class="btn-primary" style="width:100%;margin-top:0.5rem;">ثبت رزرو</button>
+        </div>
+    </section>
+
+    <!-- ============================================================
+                       Footer
+                       ============================================================ -->
+    <footer class="footer">
+        <div class="footer-logo">🎮 CYRAX GAME CLUB</div>
+        <p class="footer-tagline">فراتر از یک گیم کلاب معمولی</p>
+        <div class="footer-links">
+            <a href="https://wa.me/989369106238" target="_blank"><i class="fab fa-whatsapp"></i> رزرو واتساپ</a>
+            <a href="https://www.instagram.com/game_club_cyrax" target="_blank"><i class="fab fa-instagram"></i> اینستاگرام</a>
+            <a href="tel:09173115680"><i class="fas fa-phone"></i> تماس سریع</a>
+        </div>
+        <p class="footer-copy">© 2026 All Rights Reserved</p>
     </footer>
 
-    <div id="imgModal" class="hidden fixed inset-0 bg-black/95 z-[100000] flex items-center justify-center opacity-0 transition-opacity duration-200">
-        <button id="btn-close-modal" class="absolute top-6 right-6 text-2xl text-slate-400 hover:text-white transition">✕</button>
-        <img id="modalImg" class="max-h-[85vh] max-w-[90%] rounded-xl shadow-2xl transition-transform duration-200 scale-95" alt="Preview">
+    <!-- ============================================================
+                       Image Modal
+                       ============================================================ -->
+    <div class="modal-overlay" id="imageModal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <img id="modalImage" src="" alt="پیش‌نمایش">
     </div>
 
+    <!-- ============================================================
+                       WhatsApp Float
+                       ============================================================ -->
+    <a href="https://wa.me/989369106238" target="_blank" class="whatsapp-float" title="چت در واتساپ">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ============================================================
+                       JavaScript
+                       ============================================================ -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // ورود به سایت از اسپلش اسکرین
-            document.getElementById('btn-enter').addEventListener('click', () => {
-                const splash = document.getElementById('splash');
-                splash.style.opacity = '0';
-                setTimeout(() => splash.remove(), 700);
+        // ============ ۸. Page Loader ============
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+                initReveal();
+            }, 1000);
+        });
+
+        // ============ ۹. Navbar Hide/Show on Scroll ============
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const now = window.scrollY;
+            if (now > lastScroll && now > 250) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            lastScroll = now;
+        });
+
+        // ============ Mobile Menu ============
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // ============ ۱۱. Theme Toggle with LocalStorage ============
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('cyrax-theme', theme);
+            themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        setTheme(localStorage.getItem('cyrax-theme') || 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // ============ ۱۰. Accordion ============
+        function toggleAccordion(contentId, trigger) {
+            const content = document.getElementById(contentId);
+            const isOpen = content.classList.contains('open');
+
+            // Close others
+            document.querySelectorAll('.accordion-content.open').forEach(el => {
+                if (el.id !== contentId) {
+                    el.classList.remove('open');
+                    const otherTrigger = document.querySelector(`[onclick*="${el.id}"]`);
+                    if (otherTrigger) otherTrigger.classList.remove('open');
+                }
             });
 
-            // ۹. بهینه‌سازی رویدادها با استفاده از Event Delegation برای آکاردئون‌ها
-            document.body.addEventListener('click', (e) => {
-                const trigger = e.target.closest('.accordion-trigger');
-                if (trigger) {
-                    const targetId = trigger.getAttribute('data-target');
-                    const content = document.getElementById(targetId);
-                    const icon = trigger.querySelector('.fa-chevron-down');
-                    
-                    if (content) {
-                        content.classList.toggle('open');
-                        if (icon) {
-                            icon.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
-                        }
+            if (isOpen) {
+                content.classList.remove('open');
+                trigger.classList.remove('open');
+            } else {
+                content.classList.add('open');
+                trigger.classList.add('open');
+                setTimeout(() => {
+                    if (content.getBoundingClientRect().bottom > window.innerHeight) {
+                        content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
-                }
-            });
+                }, 150);
+            }
+        }
 
-            // مدیریت و باز کردن مدال عکس‌ها با انیمیشن نرم مینیمال
-            const modal = document.getElementById('imgModal');
-            const modalImg = document.getElementById('modalImg');
+        // ============ Image Modal ============
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImage').src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-            document.body.addEventListener('click', (e) => {
-                if (e.target.classList.contains('gallery-img')) {
-                    modalImg.src = e.target.src;
-                    modal.classList.remove('hidden');
-                    setTimeout(() => {
-                        modal.classList.remove('opacity-0');
-                        modalImg.classList.remove('scale-95');
-                    }, 20);
-                }
-            });
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-            const closeModal = () => {
-                modal.classList.add('opacity-0');
-                modalImg.classList.add('scale-95');
-                setTimeout(() => modal.classList.add('hidden'), 20);
-            };
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
-            document.getElementById('btn-close-modal').addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
 
-            // اکشن دکمه رزرو آنلاین
-            document.getElementById('btn-reserve').addEventListener('click', () => {
-                const type = document.getElementById('serviceType').value;
-                const date = document.getElementById('resDate').value;
-                const time = document.getElementById('resTime').value;
+        // ============ Reserve ============
+        function handleReserve() {
+            const type = document.getElementById('serviceType').value;
+            const date = document.getElementById('resDate').value;
+            const time = document.getElementById('resTime').value;
 
-                if (!type) {
-                    alert('لطفا نوع سرویس را انتخاب کنید');
-                    return;
-                }
-                alert(`✅ درخواست رزرو ثبت شد!\n\nنوع سرویس: ${type}\nتاریخ: ${date || 'ثبت نشده'}\nساعت: ${time || 'ثبت نشده'}\n\nجزئیات نهایی جهت تایید به واتساپ شما ارسال خواهد شد.`);
-            });
+            if (!type) return alert('⚠️ لطفا نوع سرویس را انتخاب کنید');
+            if (!date) return alert('⚠️ لطفا تاریخ رزرو را انتخاب کنید');
+            if (!time) return alert('⚠️ لطفا ساعت رزرو را انتخاب کنید');
 
-            // ۶. انیمیشن اسکرول با ابزار بهینه Intersection Observer
+            const typeName = type === 'vip' ? 'اتاق VIP' : type === 'pc' ? 'سیستم PC' : 'سالن گیم';
+            alert(`✅ رزرو با موفقیت ثبت شد!\n\n📋 ${typeName}\n📅 ${date}\n⏰ ${time}\n\n📲 جزئیات از واتساپ ارسال می‌شود.`);
+        }
+
+        // ============ ۶. Intersection Observer for Reveal ============
+        function initReveal() {
+            const revealElements = document.querySelectorAll('.reveal, .stagger');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.05 });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            revealElements.forEach(el => observer.observe(el));
+
+            // Also check elements already visible
+            revealElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // ============ Smooth Scroll ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
+
+        console.log('✅ CYRAX GAME CLUB — Minimal Design Loaded');
+        console.log('🎯 10+1 Features Active: Glassmorphism | Accordion | Reveal | Theme | Outline BTN | Loader | Gallery | Typography Scale | Navbar Hide | Negative Space');
     </script>
 </body>
 </html>
