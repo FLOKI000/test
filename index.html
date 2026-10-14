@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
 
-    <title>FLOKI000 | EF3.IR</title>
+    <title>فروشگاه من</title>
 
     <style>
         * {
@@ -31,6 +31,20 @@
             display: block;
             background: #ffffff;
         }
+
+        #error {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            color: #222222;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            font-family: Tahoma, Arial, sans-serif;
+            line-height: 2;
+        }
     </style>
 </head>
 
@@ -39,10 +53,21 @@
     <iframe
         id="store"
         src="https://floch3.blogix.ir/"
-        title="FLOKI000 | EF3.IR"
+        title="فروشگاه"
         allow="clipboard-read; clipboard-write"
         referrerpolicy="strict-origin-when-cross-origin">
     </iframe>
+
+    <div id="error">
+        <div>
+            <h3>امکان نمایش فروشگاه وجود ندارد</h3>
+            <p>
+                ممکن است سایت مقصد نمایش داخل iframe را مسدود کرده باشد.
+                برای نمایش آن روی دامنه خودتان، به راهکار سازگار با
+                تنظیمات و مجوزهای سایت مقصد نیاز دارید.
+            </p>
+        </div>
+    </div>
 
 </body>
 </html>
